@@ -1,4 +1,4 @@
-package ui;
+package main.ui;
 
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 // hs
 public class LibraryApplication {
     /* following B04 leclab */
-    private int random;
+
     private Scanner scanner;
     private List<String> availablelist = new ArrayList<>();
     private List<String> loanedList = new ArrayList<>();
