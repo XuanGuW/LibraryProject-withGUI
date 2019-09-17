@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-// hs
+
 public class LibraryApplication {
     /* following B04 leclab */
 
@@ -20,48 +20,45 @@ public class LibraryApplication {
         processOperations();
     }
 
-    private int howLongAllowed(){
+    private int howLongAllowed() {
         return 20;
     }
-
 
     private void processOperations() {
         String operation = "";
         String book = "";
-
         while (true) {
-            System.out.println("Please enter what you would like to do: " +
-                    "\n[1] add a book " +
-                    "\n[2] loan a book " +
-                    "\n[3] see all the books. " );
+            System.out.println("Please enter what you would like to do: "
+                    + "\n[1] add a book "
+                    + "\n[2] loan a book "
+                    + "\n[3] see all the books. ");
             operation = scanner.nextLine();
             System.out.println("You selected: " + operation);
+            helper(operation);
+        }
+    }
 
-            if (operation.equals("1")) {
-                System.out.println("Please enter the name of the book: ");
-                book = scanner.nextLine();
-                System.out.println("The book: " + "<" + book + ">" + " is added.");
-                availablelist.add(book);
+    private void helper(String operation) {
+        String book;
+        if (operation.equals("1")) {
+            System.out.println("Please enter the name of the book: ");
+            book = scanner.nextLine();
+            System.out.println("The book: " + "<" + book + ">" + " is added.");
+            availablelist.add(book);
+        } else if (operation.equals("2")) {
+            System.out.println("Please enter the name of the book: ");
 
+            book = scanner.nextLine();
+            System.out.println("<" + book + ">" + " is removed from Available List.");
 
-            } else if(operation.equals("2")) {
-                System.out.println("Please enter the name of the book: ");
+            int t = howLongAllowed();
 
-                book = scanner.nextLine();
-                System.out.println("<" + book + ">" + " is removed from Available List.");
-
-                int t = howLongAllowed();
-
-                System.out.println("You are allowed to keep this book for " + t + " days.");
-
-                availablelist.remove(book);
-                loanedList.add(book);
-
-            } else if (operation.equals("3")) {
-                System.out.println("These books are available: " + availablelist);
-                System.out.println("These books are loaned: " + loanedList);
-            }
-
+            System.out.println("You are allowed to keep this book for " + t + " days.");
+            availablelist.remove(book);
+            loanedList.add(book);
+        } else if (operation.equals("3")) {
+            System.out.println("These books are available: " + availablelist);
+            System.out.println("These books are loaned: " + loanedList);
         }
     }
 
