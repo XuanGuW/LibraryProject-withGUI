@@ -26,7 +26,6 @@ public class LibraryApplication {
 
     private void processOperations() {
         String operation = "";
-        String book = "";
         while (true) {
             System.out.println("Please enter what you would like to do: "
                     + "\n[1] add a book "
@@ -65,6 +64,7 @@ public class LibraryApplication {
 
     public static void main(String[] args) {
         new LibraryApplication();
+
 
     }
 
