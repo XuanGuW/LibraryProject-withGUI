@@ -17,16 +17,16 @@ public class Book {
 
     }
 
-    //SPECIFIES: return true if a book is available or false otherwise
-
+    //MODIFIES: this
+    //EFFECTS: return the availability
     public boolean isAvailable() {
         return availability;
     }
 
 
 
-
-
+    //MODIFIES: this and customer
+    //EFFECTS: A customer borrow a book
     public Customer getBorrower() {
         return borrower;
     }

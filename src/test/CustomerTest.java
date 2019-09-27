@@ -1,12 +1,11 @@
 import main.ui.Customer;
 
 import main.ui.Book;
-import main.ui.Library;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +19,7 @@ public class CustomerTest {
     @BeforeEach
     void before(){
         b = new Book("abc","author");
+
 
         customer = new Customer("TOM",123456789);
         customerA = new Customer("JACK",987654321);
@@ -40,6 +40,7 @@ public class CustomerTest {
         //check that the book is borrowed by the customer
         assertFalse(b.isAvailable());
         assertEquals(customer, b.getBorrower());
+
 
     }
 
@@ -63,6 +64,7 @@ public class CustomerTest {
 
     @Test
     public void testReturnBookWithRightCustomerInformation() {
+        //a customer borrowed the book
         customer.borrow(b);
         //check that the book was lent to the customer
         assertEquals(customer, b.getBorrower());
@@ -88,6 +90,7 @@ public class CustomerTest {
         //check the book is unavailable
         assertFalse(b.isAvailable());
     }
+
 
 
 }

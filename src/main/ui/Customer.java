@@ -5,19 +5,22 @@ import java.util.List;
 
 public class Customer {
     String name;
-    List<Book> mybooks = new ArrayList<>();
     Integer phonenumber;
+
+
+    //this will get customer to see what they have borrowed, and will be down later
+    List<Book> mybooks = new ArrayList<>();
+
 
 
     public Customer(String name, Integer phonenumber) {
         this.name = name;
         this.phonenumber = phonenumber;
-
     }
 
     //REQUIRES: the book is not borrowed by others
     //MODIFIES: book and this
-    //EFFECTS: lend a book to a customer
+    //EFFECTS: a customer borrow a book
 
     public void borrow(Book book) {
         if (book.getBorrower() == null) {
@@ -39,5 +42,7 @@ public class Customer {
 
         }
     }
+
+
 }
 
