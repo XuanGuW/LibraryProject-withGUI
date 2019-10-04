@@ -1,5 +1,6 @@
-import main.ui.Book;
+import main.ui.NormalBook;
 import main.ui.Library;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -7,8 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
 
-    Book b;
-    Library library = new Library();
+    NormalBook b;
+    Library library;
+    @BeforeEach
+    public void before(){
+        b = new NormalBook("","");
+        library = new Library();}
 
 
     @Test
@@ -17,7 +22,7 @@ public class LibraryTest {
 
     public void testAddANewBook() {
         //check the book is not in the library
-        assertEquals(library.librarySize(), 0);
+        assertEquals(library.booksNumber(), 0);
 
         //add the book
         library.addABook(b);
@@ -40,15 +45,23 @@ public class LibraryTest {
         library.addABook(b);
 
         //check the book is in the library
-        assertEquals(1, library.librarySize());
+        assertEquals(1, library.booksNumber());
 
         //add the book again
         library.addABook(b);
 
         //check the book only appears once in the library
-        assertEquals(1, library.librarySize());
+        assertEquals(1, library.booksNumber());
 
 
     }
+
+    @Test
+    public void testLibraryGetBooks(){
+        library.addABook(b);
+        library.getBooks();
+    }
+
+
 
 }

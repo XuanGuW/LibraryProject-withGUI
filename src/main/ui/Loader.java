@@ -1,7 +1,6 @@
 package main.ui;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,14 +17,14 @@ public class Loader {
 
     //this project also illustrates splitting a line up by spaces
 
-    public static void load(List<Book> bookList) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get("books.txt"));
-        for (String line : lines) {
-            ArrayList<String> partsOfLine = splitOnSpace(line);
-            Book b = new Book("","");
+    public static void load(List<NormalBook> normalBookList,String text) throws IOException {
+        List<String> lineOfStrings = Files.readAllLines(Paths.get("books.txt"));
+        for (String string : lineOfStrings) {
+            ArrayList<String> partsOfLine = splitOnSpace(string);
+            NormalBook b = new NormalBook("","");
             b.name = partsOfLine.get(0);
             b.author = partsOfLine.get(1);
-            bookList.add(b);
+            normalBookList.add(b);
         }
 
     }

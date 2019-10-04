@@ -18,29 +18,14 @@ public class Saver {
 
     //this project also illustrates splitting a line up by spaces
 
-    public static void save(List<Book> bookList) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get("booksNew.txt"));
+    public static void save(List<NormalBook> normalBookList, String text) throws IOException {
+
+        //List<String> lines = Files.readAllLines(Paths.get("books.txt"));
         PrintWriter writer = new PrintWriter("booksNew.txt","UTF-8");
 
-
-
-        for (Book book : bookList) {
-            lines.add(book.toString());
+        for (NormalBook normalBook : normalBookList) {
+            writer.println(normalBook.toString());
         }
-
-
-        for (String line : lines) {
-            ArrayList<String> partsOfLine = splitOnSpace(line);
-            System.out.print("Name: " + partsOfLine.get(0) + " ");
-            System.out.println("Author: " + partsOfLine.get(1));
-            writer.println(line);
-        }
-        writer.close(); //note -- if you miss this, the file will not be written at all.
-    }
-
-
-    public static ArrayList<String> splitOnSpace(String line) {
-        String[] splits = line.split(" ");
-        return new ArrayList<>(Arrays.asList(splits));
+        writer.close();
     }
 }

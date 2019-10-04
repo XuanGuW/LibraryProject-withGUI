@@ -1,6 +1,6 @@
 import main.ui.Customer;
 
-import main.ui.Book;
+import main.ui.NormalBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CustomerTest {
-    Book b;
+    NormalBook b;
     Customer customerA;
     Customer customerB;
-    List<Book> myBooksA;
-    List<Book> myBooksB;
+    List<NormalBook> myBooksA;
+    List<NormalBook> myBooksB;
 
 
     @BeforeEach
     void before(){
-        b = new Book("abc","author");
+        b = new NormalBook("abc","author");
         myBooksA = new ArrayList<>();
         myBooksB = new ArrayList<>();
 
@@ -94,6 +94,15 @@ public class CustomerTest {
         customerA.returnBook(b);
         //check the book is unavailable
         assertFalse(b.isAvailable());
+    }
+
+    @Test
+    public void testMyBooks(){
+        customerA.borrow(b);
+
+        assertEquals(customerA.getMyNormalBooks().size(),1);
+        assertEquals(customerA.getMyNormalBooks().get(0),b);
+
     }
 
 }
