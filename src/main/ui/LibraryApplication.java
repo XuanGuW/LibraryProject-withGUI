@@ -1,106 +1,151 @@
 package main.ui;
 
 
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class LibraryApplication {
-    /* following B04 leclab */
 
+
+    private Saver saver;
+    private Loader loader;
     private Scanner scanner;
     private Library library = new Library();
+    private List<Book> myBooks = new ArrayList();
+    private Book book = new Book("", "");
 
-    public LibraryApplication() {
+    public LibraryApplication() throws IOException {
 
         scanner = new Scanner(System.in);
         processOperations();
+        library.getBooks();
+        loader.load(library.availablebook);
     }
 
-    private int howLongAllowed() {
-        return 20;
-    }
+    private void processOperations() throws IOException {
 
-    private void processOperations() {
-        String operation = "";
+        String identity = "";
         while (true) {
-            System.out.println("Please enter what you would like to do: "
-                    + "\n[1] add a book "
-                    + "\n[2] loan a book "
-                    + "\n[3] return a book"
-                    + "\n[4] see all the books. ");
-            operation = scanner.nextLine();
-            System.out.println("You selected: " + operation);
-            addABook(operation);
+            System.out.println("Are you a customer? or a librarian?: "
+                    + "\n[1] I am a customer "
+                    + "\n[2] I am a librarian "
+                    + "\n[3] Quit."
+            );
+
+            identity = scanner.nextLine();
+            identityHelper(identity);
+            saver.save(library.availablebook);
+            break;
+
+        }
+
+    }
+
+
+
+    private void identityHelper(String identity) {
+
+        if (identity.equals("1")) {
+            customer();
+        } else if (identity.equals("2")) {
+            librarian();
         }
     }
 
-    private void addABook(String operation) {
-        Book book = new Book("", "");
+
+    private void customer() {
+        String operation;
+        System.out.println("What are you going to do today?"
+                + "\n [1] I want to borrow a book"
+                + "\n [2] I want to return a book");
+        operation = scanner.nextLine();
         if (operation.equals("1")) {
-            System.out.println("Please enter the name of the book: ");
-            book.name = scanner.nextLine();
-            System.out.println("Please enter the author's name: ");
-            book.author = scanner.nextLine();
-            System.out.println("The book: " + "<" + book + ">" + " is added.");
-            library.addABook(book);
-        } else {
-            loanABook(operation);
-        }
-    }
+            loanABook();
 
-    private void loanABook(String operation) {
-        if (operation.equals("2")) {
-            Book book = new Book("", "");
-            Customer customer = new Customer("", 0);
-
-            System.out.println("Please enter the name of the book: ");
-            book.name = scanner.nextLine();
-            System.out.println("Please enter the author's name: ");
-            book.author = scanner.nextLine();
-            System.out.println("Please enter the name of the customer: ");
-            customer.name = scanner.nextLine();
-            System.out.println("Please enter the phone number of the customer: ");
-            customer.phonenumber = scanner.nextInt();
-            System.out.println("<" + book + ">" + " is removed from Available List.");
-            int t = howLongAllowed();
-            System.out.println("You are allowed to keep this book for " + t + " days.");
-            customer.borrow(book);
-        } else {
-            returnABook(operation);
-        }
-    }
-
-    private void returnABook(String operation) {
-        if (operation.equals("3")) {
-            Book book = new Book("","");
-            Customer customer = new Customer("",0);
-
-            System.out.println("Please enter the name of the book: ");
-            book.name = scanner.nextLine();
-            System.out.println("Please enter the author's name: ");
-            book.author = scanner.nextLine();
-            System.out.println("Please enter the name of the customer: ");
-            customer.name = scanner.nextLine();
-            System.out.println("Please enter the phone number of the customer: ");
-            customer.phonenumber = scanner.nextInt();
-            System.out.println("This book is returned to the library. Thank you! ");
-
-            customer.returnBook(book);
-
-        } else {
-            seeAllBooks(operation);
+        } else if (operation.equals("2")) {
+            returnABook();
         }
     }
 
 
-    private void seeAllBooks(String operation) {
+    private void librarian() {
+        String operation;
+        System.out.println("What are you going to do today?"
+                + "\n[1] I want to add a book"
+                + "\n[2] I want to see all the books");
+        operation = scanner.nextLine();
+        if (operation.equals("1")) {
+            addABook();
+        } else if (operation.equals("2")) {
+            seeAllBooks();
+        }
 
-        if (operation.equals("4")) {
-            System.out.println("These books are available: ");
+    }
+
+    private void addABook() {
+        System.out.println("Please enter the name of the book: ");
+        book.name = scanner.nextLine();
+        System.out.println("Please enter the author's name: ");
+        book.author = scanner.nextLine();
+        System.out.println("The book: " + "<" + book.name + ">" + " is added to the library.");
+        library.addABook(book);
+
+
+
+
+
+    }
+
+    private void loanABook() {
+
+        Customer customer = new Customer("", 0, myBooks);
+        System.out.println("Please enter the name of the book: ");
+        book.name = scanner.nextLine();
+        System.out.println("Please enter the author's name: ");
+        book.author = scanner.nextLine();
+        System.out.println("Please enter your name: ");
+        customer.name = scanner.nextLine();
+        System.out.println("Please enter your phone: ");
+        customer.phoneNumber = scanner.nextInt();
+        System.out.println("Thank you! " + "\n You can keep the book for 20 days");
+        customer.borrow(book);
+
+    }
+
+    private void returnABook() {
+
+        Customer customer = new Customer("", 0, myBooks);
+
+        System.out.println("Please enter the name of the book: ");
+        book.name = scanner.nextLine();
+        System.out.println("Please enter the author's name: ");
+        book.author = scanner.nextLine();
+        System.out.println("Please enter the name of the customer: ");
+        customer.name = scanner.nextLine();
+        System.out.println("Please enter the phone number of the customer: ");
+        customer.phoneNumber = scanner.nextInt();
+        System.out.println("This book is returned to the library. Thank you! ");
+
+        customer.returnBook(book);
+    }
+
+
+    private void seeAllBooks() {
+        if (library.size == 0) {
+            System.out.println("Sorry, no books are in the library right now");
+        } else {
+            System.out.println("These books are in the library: ");
             library.getBooks();
 
         }
     }
+
+
+
+
 }
 

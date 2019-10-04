@@ -13,6 +13,8 @@ public class Library {
 
     }
 
+    
+
 
 
     //MODIFIES: this
@@ -21,7 +23,6 @@ public class Library {
         if (!availablebook.contains(book)) {
             availablebook.add(book);
         }
-
     }
 
 
@@ -34,8 +35,8 @@ public class Library {
         for (Book b : availablebook) {
             System.out.println("Book name: " + "<" + b.name + ">" + "\nAuthor's name: " + b.author);
         }
-
     }
+
 
     //EFFECTS: check if the library contains the book
 
@@ -48,6 +49,8 @@ public class Library {
     public int librarySize() {
         return availablebook.size();
     }
+
+
 
 
 }

@@ -6,23 +6,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CustomerTest {
     Book b;
-    Customer customer;
     Customer customerA;
+    Customer customerB;
+    List<Book> myBooksA;
+    List<Book> myBooksB;
 
 
     @BeforeEach
     void before(){
         b = new Book("abc","author");
+        myBooksA = new ArrayList<>();
+        myBooksB = new ArrayList<>();
 
-
-        customer = new Customer("TOM",123456789);
-        customerA = new Customer("JACK",987654321);
+        customerA = new Customer("TOM",123456789, myBooksA);
+        customerB = new Customer("JACK",987654321, myBooksB);
 
 
     }
@@ -35,11 +40,11 @@ public class CustomerTest {
         assertTrue(b.isAvailable());
 
         //a customer borrow a book
-        customer.borrow(b);
+        customerA.borrow(b);
 
         //check that the book is borrowed by the customer
         assertFalse(b.isAvailable());
-        assertEquals(customer, b.getBorrower());
+        assertEquals(customerA, b.getBorrower());
 
 
     }
@@ -48,15 +53,15 @@ public class CustomerTest {
     //TODO: outcome: the book is still borrowed by the previous customer
     @Test
     public void testBorrowBookUnavailable() {
-        customerA.borrow(b);
+        customerB.borrow(b);
         //check that the book is unavailable
         assertFalse(b.isAvailable());
         //a customer borrow a book
-        customer.borrow(b);
+        customerA.borrow(b);
         //check that the book is borrowed by the previous customer
         assertFalse(b.isAvailable());
-        assertNotEquals(customer,b.getBorrower());
-        assertEquals(customerA,b.getBorrower());
+        assertNotEquals(customerA,b.getBorrower());
+        assertEquals(customerB,b.getBorrower());
     }
 
     //TODO: Test Return Book With Right Customer Information: A customer return a book that he borrowed
@@ -65,12 +70,12 @@ public class CustomerTest {
     @Test
     public void testReturnBookWithRightCustomerInformation() {
         //a customer borrowed the book
-        customer.borrow(b);
+        customerA.borrow(b);
         //check that the book was lent to the customer
-        assertEquals(customer, b.getBorrower());
+        assertEquals(customerA, b.getBorrower());
 
         //return the book
-        customer.returnBook(b);
+        customerA.returnBook(b);
 
         //check the book is available
         assertTrue(b.isAvailable());
@@ -81,16 +86,14 @@ public class CustomerTest {
 
     @Test
     public void testReturnBookWithouRightCustomerInformation() {
-        customerA.borrow(b);
+        customerB.borrow(b);
 
         //check that the book was lent to the customer
-        assertNotEquals(b.getBorrower(),customer);
+        assertNotEquals(b.getBorrower(), customerA);
         //return the book
-        customer.returnBook(b);
+        customerA.returnBook(b);
         //check the book is unavailable
         assertFalse(b.isAvailable());
     }
-
-
 
 }

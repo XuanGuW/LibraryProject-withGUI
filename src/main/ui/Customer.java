@@ -1,24 +1,21 @@
 package main.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
     String name;
-    Integer phonenumber;
-
-
-    //this will get customer to see what they have borrowed, and will be down later
-    List<Book> mybooks = new ArrayList<>();
+    Integer phoneNumber;
+    List<Book> myBooks;
 
 
 
-    public Customer(String name, Integer phonenumber) {
+    public Customer(String name, Integer phoneNumber, List<Book> myBooks) {
         this.name = name;
-        this.phonenumber = phonenumber;
+        this.phoneNumber = phoneNumber;
+        this.myBooks = myBooks;
     }
 
-    //REQUIRES: the book is not borrowed by others
+    //REQUIRES: the book is in the library
     //MODIFIES: book and this
     //EFFECTS: a customer borrow a book
 
@@ -26,7 +23,9 @@ public class Customer {
         if (book.getBorrower() == null) {
             book.availability = false;
             book.borrower = this;
-            mybooks.add(book);
+            myBooks.add(book);
+        } else {
+            System.out.println("Sorry, this book is not available.");
         }
     }
 
@@ -37,12 +36,15 @@ public class Customer {
         if (book.borrower == this) {
             book.availability = true;
             book.borrower = null;
-            mybooks.remove(book);
+            myBooks.remove(book);
 
 
         }
     }
 
 
+    public List<Book> getMyBooks() {
+        return myBooks;
+    }
 }
 
