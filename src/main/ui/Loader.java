@@ -17,6 +17,7 @@ public class Loader {
             b.name = partsOfLine.get(0);
             b.author = partsOfLine.get(1);
             normalBookList.add(b);
+            System.out.println(b.name);
         }
 
     }
