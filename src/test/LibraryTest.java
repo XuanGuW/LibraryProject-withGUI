@@ -59,7 +59,7 @@ public class LibraryTest {
     @Test
     public void testLibraryGetBooks(){
         library.addABook(b);
-        library.getBooks();
+        assertTrue(library.getAvailableBooksList().contains(b));
     }
 
 

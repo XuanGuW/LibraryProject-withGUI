@@ -26,8 +26,8 @@ public class CustomerTest {
         myBooksA = new ArrayList<>();
         myBooksB = new ArrayList<>();
 
-        customerA = new Customer("TOM",123456789, myBooksA);
-        customerB = new Customer("JACK",987654321, myBooksB);
+        customerA = new Customer("TOM","123456789", myBooksA);
+        customerB = new Customer("JACK","987654321", myBooksB);
 
 
     }
@@ -100,8 +100,8 @@ public class CustomerTest {
     public void testMyBooks(){
         customerA.borrow(b);
 
-        assertEquals(customerA.getMyNormalBooks().size(),1);
-        assertEquals(customerA.getMyNormalBooks().get(0),b);
+        assertEquals(customerA.getMyBooks().size(),1);
+        assertEquals(customerA.getMyBooks().get(0),b);
 
     }
 

@@ -1,7 +1,6 @@
 package main.ui;
 
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +14,22 @@ public class LibraryApplication {
     private Loader loader = new Loader();
     private Scanner scanner;
     private Library library = new Library();
-    private List<NormalBook> myNormalBooks = new ArrayList();
-    private NormalBook normalBook = new NormalBook("", "");
+    private List<Book> myBooks;
+    private List<Customer> customerList = new ArrayList<>();
+
+    private Book book = new NormalBook("", "");
     private String text;
 
+
+    // not know how to store boolean and number value and return it
     public LibraryApplication() throws IOException {
-        text = "books.text";
+
+        text = "books.txt";
         scanner = new Scanner(System.in);
+
+        myBooks = loader.load(library.getAvailableBooksList(), text);
+        library.setAvailableBooksList(myBooks);
         processOperations();
-        loader.load(library.availableNormalBooks,text);
     }
 
     private void processOperations() throws IOException {
@@ -38,8 +44,7 @@ public class LibraryApplication {
 
             identity = scanner.nextLine();
             identityHelper(identity);
-            text = "booksNew";
-            saver.save(library.availableNormalBooks,text);
+            saver.save(library.getAvailableBooksList(), text);
             break;
 
         }
@@ -65,11 +70,27 @@ public class LibraryApplication {
                 + "\n [2] I want to return a book");
         operation = scanner.nextLine();
         if (operation.equals("1")) {
-            loanABook();
-
+            System.out.println("Are you a new customer?" + "\n[1]Yes" + "\n[2]No");
+            if (scanner.nextLine() == "2") {
+                loanABook();
+            } else {
+                completeCustomerInformation();
+            }
         } else if (operation.equals("2")) {
             returnABook();
         }
+    }
+
+    // create a new customer object with information, add it to customer list
+    private void completeCustomerInformation() {
+        myBooks = new ArrayList<>();
+        System.out.println("what is your name?");
+        String customerName = scanner.nextLine();
+        System.out.println("what is your phoneNumber");
+        String customerPhoneNumber = scanner.nextLine();
+        Customer customer = new Customer(customerName,customerPhoneNumber, myBooks);
+        customerList.add(customer);
+
     }
 
 
@@ -89,49 +110,61 @@ public class LibraryApplication {
 
     private void addABook() {
         System.out.println("Please enter the name of the book: ");
-        normalBook.name = scanner.nextLine();
+        book.setName(scanner.nextLine());
         System.out.println("Please enter the author's name: ");
-        normalBook.author = scanner.nextLine();
-        System.out.println("The book: " + "<" + normalBook.name + ">" + " is added to the library.");
-        library.addABook(normalBook);
-
-
-
-
+        book.setName(scanner.nextLine());
+        System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
+        library.addABook(book);
 
     }
 
+    //
     private void loanABook() {
 
-        Customer customer = new Customer("", 0, myNormalBooks);
+        Customer customer;
         System.out.println("Please enter the name of the book: ");
-        normalBook.name = scanner.nextLine();
+        String bookName = scanner.nextLine();
         System.out.println("Please enter the author's name: ");
-        normalBook.author = scanner.nextLine();
+        String authorName = scanner.nextLine();
         System.out.println("Please enter your name: ");
-        customer.name = scanner.nextLine();
+        String customerName = scanner.nextLine();
         System.out.println("Please enter your phone: ");
-        customer.phoneNumber = scanner.nextInt();
+        String phoneNumber = scanner.nextLine();
         System.out.println("Thank you! " + "\n You can keep the book for 20 days");
-        customer.borrow(normalBook);
+        customer = library.findACustomer(customerName, phoneNumber);
+        book = library.findABook(bookName, authorName);
+        book.setBorrower(customer);
+        book.setAvailability(false);
+        customer.borrow(book);
+
 
     }
+
+    //assuming there is only one book with a name and a author's name
+    //   and a customer has a unique name
 
     private void returnABook() {
 
-        Customer customer = new Customer("", 0, myNormalBooks);
+
 
         System.out.println("Please enter the name of the book: ");
-        normalBook.name = scanner.nextLine();
+        String bookName = scanner.nextLine();
         System.out.println("Please enter the author's name: ");
-        normalBook.author = scanner.nextLine();
-        System.out.println("Please enter the name of the customer: ");
-        customer.name = scanner.nextLine();
-        System.out.println("Please enter the phone number of the customer: ");
-        customer.phoneNumber = scanner.nextInt();
+        String authorName = scanner.nextLine();
+        System.out.println("Please enter your name: ");
+        String customerName = scanner.nextLine();
+        System.out.println("Please enter your telephone number");
+        String phoneNumber = scanner.nextLine();
+
+        Customer customer = library.findACustomer(customerName, phoneNumber);
+        Book normalBook = library.findABook(bookName, authorName);
+
         System.out.println("This book is returned to the library. Thank you! ");
 
         customer.returnBook(normalBook);
+        normalBook.setBorrower(null);
+        normalBook.setAvailability(true);
+
     }
 
 
@@ -140,7 +173,7 @@ public class LibraryApplication {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");
-            library.getBooks();
+            library.getAvailableBooksList();
 
         }
     }

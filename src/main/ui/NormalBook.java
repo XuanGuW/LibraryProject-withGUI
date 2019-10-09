@@ -4,10 +4,10 @@ package main.ui;
 
 public class NormalBook implements Book {
 
-    public String name;
-    public String author;
-    public Customer borrower;
-    public Boolean availability;
+    private String name;
+    private String author;
+    private Customer borrower;
+    private Boolean availability;
 
 
     public NormalBook(String name, String author) {
@@ -15,6 +15,13 @@ public class NormalBook implements Book {
         this.author = author;
         this.borrower = null;
         this.availability = true;
+    }
+
+
+    //EFFECT: Make two strings to represent book name and author
+    @Override
+    public String toString() {
+        return  name + " " + author;
     }
 
     //EFFECTS: return the availability
@@ -29,10 +36,38 @@ public class NormalBook implements Book {
         return borrower;
     }
 
-    //EFFECT: Make two strings to represent book name and author
     @Override
-    public String toString() {
-        return  name + " " + author;
+    public String getName() {
+        return name;
     }
+
+    @Override
+    public String getAuthor() {
+        return author;
+    }
+
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public void setBorrower(Customer customer) {
+        this.borrower = customer;
+    }
+
+    @Override
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
+
+
+
 
 }

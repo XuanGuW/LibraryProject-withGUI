@@ -30,10 +30,10 @@ public class LoaderTest {
 
     @Test
     public void testSaver() throws IOException {
-        saver.save(library.availableNormalBooks,textSave);
+        saver.save(library.getAvailableBooksList(),textSave);
 
-        loader.load(library.availableNormalBooks,textLoad);
-        assertEquals(library.availableNormalBooks.get(0),b);
+        loader.load(library.getAvailableBooksList(),textLoad);
+        assertEquals(library.getAvailableBooksList().get(0),b);
     }
 
 

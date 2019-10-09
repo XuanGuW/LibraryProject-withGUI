@@ -9,16 +9,17 @@ import java.util.List;
 
 public class Loader {
 
-    public static void load(List<NormalBook> normalBookList,String text) throws IOException {
-        List<String> lineOfStrings = Files.readAllLines(Paths.get("books.txt"));
+    public static List<Book> load(List<Book> bookList, String text) throws IOException {
+        List<String> lineOfStrings = Files.readAllLines(Paths.get(text));
         for (String string : lineOfStrings) {
             ArrayList<String> partsOfLine = splitOnSpace(string);
             NormalBook b = new NormalBook("","");
-            b.name = partsOfLine.get(0);
-            b.author = partsOfLine.get(1);
-            normalBookList.add(b);
-            System.out.println(b.name);
+            b.setName(partsOfLine.get(0));
+            b.setAuthor(partsOfLine.get(1));
+            bookList.add(b);
+            System.out.println(b.getName());
         }
+        return bookList;
 
     }
 
