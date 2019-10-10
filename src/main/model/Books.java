@@ -1,4 +1,4 @@
-package main.ui;
+package model;
 
 import java.util.List;
 

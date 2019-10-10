@@ -1,10 +1,9 @@
-import main.ui.NormalBook;
+import model.NormalBook;
 import main.ui.Library;
 import main.ui.Loader;
 import main.ui.Saver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 

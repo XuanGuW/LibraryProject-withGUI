@@ -1,4 +1,4 @@
-package main.ui;
+package model;
 
 public interface Book {
 

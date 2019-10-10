@@ -1,4 +1,8 @@
-package main.ui;
+package ui;
+
+import model.Book;
+import model.Books;
+import model.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

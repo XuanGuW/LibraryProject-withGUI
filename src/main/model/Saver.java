@@ -1,4 +1,6 @@
-package main.ui;
+package model;
+
+import model.Book;
 
 import java.io.IOException;
 import java.io.PrintWriter;

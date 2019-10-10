@@ -1,11 +1,11 @@
-package main.ui;
+package model;
 
 public abstract class AbstractBook implements Book {
 
-    private String name;
-    private String author;
-    private Customer borrower;
-    private Boolean availability = true;
+    protected String name;
+    protected String author;
+    protected Customer borrower;
+    protected Boolean availability = true;
 
     //EFFECT: Make two strings to represent book name and author
     @Override

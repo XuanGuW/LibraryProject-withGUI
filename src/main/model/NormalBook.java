@@ -1,13 +1,6 @@
-package main.ui;
-
-
+package model;
 
 public class NormalBook extends AbstractBook {
-
-    private String name;
-    private String author;
-    private Customer borrower;
-    private Boolean availability;
 
 
     public NormalBook(String name, String author) {

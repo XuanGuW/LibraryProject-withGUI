@@ -1,5 +1,5 @@
-import main.ui.Book;
-import main.ui.NormalBook;
+import model.Book;
+import model.NormalBook;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
