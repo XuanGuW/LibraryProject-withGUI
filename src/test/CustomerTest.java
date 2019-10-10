@@ -1,5 +1,5 @@
-import model.Book;
-import main.ui.Customer;
+
+import model.*;
 
 import model.NormalBook;
 

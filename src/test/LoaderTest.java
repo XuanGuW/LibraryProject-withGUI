@@ -1,9 +1,9 @@
-import model.NormalBook;
-import main.ui.Library;
-import main.ui.Loader;
-import main.ui.Saver;
+
+import model.*;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.Library;
 
 import java.io.IOException;
 
@@ -18,8 +18,8 @@ public class LoaderTest {
 
     @BeforeEach
     void before(){
-        textLoad = "booksTestLoad1.text";
-        textSave = "bookTestSave1.text";
+        textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
+        textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
 
         library = new Library();
         b = new NormalBook("ASongOfIceAndFire","GeorgeR.R.Martin");

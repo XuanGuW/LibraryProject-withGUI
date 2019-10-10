@@ -1,8 +1,5 @@
 package model;
 
-import model.Book;
-import model.NormalBook;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

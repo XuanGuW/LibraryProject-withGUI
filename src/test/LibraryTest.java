@@ -1,7 +1,8 @@
-import model.NormalBook;
-import main.ui.Library;
+import model.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.Library;
 
 
 import static org.junit.jupiter.api.Assertions.*;

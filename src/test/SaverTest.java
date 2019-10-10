@@ -1,7 +1,8 @@
 import model.NormalBook;
-import main.ui.Library;
-import main.ui.Loader;
-import main.ui.Saver;
+import ui.Library;
+import model.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +29,8 @@ public class SaverTest {
 
     @Test
     public void testSaver() throws IOException {
-        textSave = "bookTest1";
-        textLoad = "bookTest1";
+        textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
+        textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
         saver.save(library.getAvailableBooksList(),textSave);
         loader.load(library.getAvailableBooksList(),textLoad);
         assertEquals(library.getAvailableBooksList().get(0),b);
@@ -39,8 +40,8 @@ public class SaverTest {
     @Test
     public void testSaver2Books() throws IOException {
         library.addABook(b2);
-        textSave = "bookTest2";
-        textLoad = "bookTest2";
+        textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
+        textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
         saver.save(library.getAvailableBooksList(),textSave);
         loader.load(library.getAvailableBooksList(),textLoad);
         assertEquals(library.getAvailableBooksList().get(0),b);
