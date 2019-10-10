@@ -17,4 +17,16 @@ public class NormalBookTest {
         assertEquals(null, normalBook.getBorrower());
 
     }
+
+    @Test
+    public void testNormalBookSetter() {
+        normalBook = new NormalBook("","");
+        normalBook.setName("Book");
+        normalBook.setAuthor("Author");
+        assertEquals("Book",normalBook.getName());
+        assertEquals("Author",normalBook.getAuthor());
+    }
+
+
+
 }

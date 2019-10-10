@@ -1,4 +1,7 @@
-package model;
+package ui;
+
+import model.Book;
+import model.NormalBook;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -3,8 +3,7 @@ import model.Magazine;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BookTest {
-    Book normalBook;
+public class MagazineTest {
     Book magazine;
 
 
