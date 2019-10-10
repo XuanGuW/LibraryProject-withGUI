@@ -17,24 +17,24 @@ public class Customer {
     //MODIFIES: book and this
     //EFFECTS: a customer borrow a book
 
-    public void borrow(Book normalBook) {
-        if (normalBook.getBorrower() == null) {
-            normalBook.setAvailability(false);
-            normalBook.setBorrower(this);
-            myBooks.add(normalBook);
+    public void borrow(Book book) {
+        if (book.getBorrower() == null) {
+            book.setAvailability(false);
+            book.setBorrower(this);
+            myBooks.add(book);
         } else {
-            System.out.println("Sorry, this book is not available.");
+            System.out.println("Sorry, this book is not available right now.");
         }
     }
 
     //REQUIRES: The book was lent out by the library
     //MODIFIES: book and this and book.getBorrower
     //EFFECTS: return a book to the library
-    public void returnBook(Book normalBook) {
-        if (normalBook.getBorrower() == this) {
-            normalBook.setAvailability(true);
-            normalBook.setBorrower(null);
-            myBooks.remove(normalBook);
+    public void returnBook(Book book) {
+        if (book.getBorrower() == this) {
+            book.setAvailability(true);
+            book.setBorrower(null);
+            myBooks.remove(book);
 
 
         }

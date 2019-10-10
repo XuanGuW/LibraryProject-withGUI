@@ -1,10 +1,10 @@
+import main.ui.Book;
 import main.ui.Customer;
 
 import main.ui.NormalBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CustomerTest {
-    NormalBook b;
+    Book b;
     Customer customerA;
     Customer customerB;
-    List<NormalBook> myBooksA;
-    List<NormalBook> myBooksB;
+    List<Book> myBooksA;
+    List<Book> myBooksB;
 
 
     @BeforeEach
@@ -85,7 +85,7 @@ public class CustomerTest {
     //TODO: outcome: the book fail to return to the library
 
     @Test
-    public void testReturnBookWithouRightCustomerInformation() {
+    public void testReturnBookWithoutRightCustomerInformation() {
         customerB.borrow(b);
 
         //check that the book was lent to the customer
