@@ -1,4 +1,5 @@
 
+import exceptions.NameIsEmptyString;
 import model.*;
 
 import model.NormalBook;
@@ -22,7 +23,11 @@ public class CustomerTest {
 
     @BeforeEach
     void before(){
-        b = new NormalBook("abc","author");
+        try {
+            b = new NormalBook("abc","author");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("book name should not be empty");
+        }
         myBooksA = new ArrayList<>();
         myBooksB = new ArrayList<>();
 
@@ -105,4 +110,19 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testSettersAndGetters() {
+        customerA.setName("A");
+        customerA.setPhoneNumber("123");
+        customerA.setMyBooks(null);
+        assertEquals("A",customerA.getName());
+        assertEquals("123",customerA.getPhoneNumber());
+        assertEquals(null,customerA.getMyBooks());
+    }
+
+    @Test
+    public void testToString() {
+        customerA.toString();
+        assertEquals(customerA.toString(),"TOM 123456789");
+    }
 }

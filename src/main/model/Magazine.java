@@ -9,6 +9,11 @@ public class Magazine extends AbstractBook {
         this.publicationYear = publicationYear;
     }
 
+    public String getPublicationYear() {
+        return publicationYear;
+    }
+
+
     @Override
     public String toString() {
         return  name + " " + publicationYear;

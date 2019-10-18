@@ -1,4 +1,5 @@
 
+import exceptions.NameIsEmptyString;
 import model.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,11 @@ public class LoaderTest {
         textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
 
         library = new Library();
-        b = new NormalBook("ASongOfIceAndFire","GeorgeR.R.Martin");
+        try {
+            b = new NormalBook("ASongOfIceAndFire","GeorgeR.R.Martin");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("Book name should not be empty");
+        }
         library.addABook(b);
 
     }

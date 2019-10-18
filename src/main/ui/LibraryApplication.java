@@ -2,6 +2,7 @@ package ui;
 
 
 import exceptions.CustomerNotFoundException;
+import exceptions.NameIsEmptyString;
 import exceptions.NoBookIsFound;
 import exceptions.NothingFoundExceptions;
 import model.*;
@@ -31,7 +32,11 @@ public class LibraryApplication {
     // not know how to store boolean and number value and return it
     public LibraryApplication() throws IOException {
 
-        book = new NormalBook("name","author");
+        try {
+            book = new NormalBook("name","author");
+        } catch (NameIsEmptyString nameIsEmptyString) {
+            System.out.println("the name of the book should not be empty");
+        }
 
         text = "books.txt";
         scanner = new Scanner(System.in);
@@ -41,7 +46,7 @@ public class LibraryApplication {
         processOperations();
     }
 
-    private void processOperations() throws IOException {
+    public void processOperations() throws IOException {
 
         String identity = "";
         while (true) {
@@ -62,7 +67,7 @@ public class LibraryApplication {
 
 
 
-    private void identityHelper(String identity) {
+    public void identityHelper(String identity) {
 
         if (identity.equals("1")) {
             customer();
@@ -72,7 +77,7 @@ public class LibraryApplication {
     }
 
 
-    private void customer() {
+    public void customer() {
         String operation;
         System.out.println("What are you going to do today?"
                 + "\n [1] I want to borrow a book"
@@ -91,7 +96,7 @@ public class LibraryApplication {
     }
 
     // create a new customer object with information, add it to customer list
-    private void completeCustomerInformation() {
+    public void completeCustomerInformation() {
         myBooks = new ArrayList<>();
         System.out.println("what is your name?");
         String customerName = scanner.nextLine();
@@ -103,7 +108,7 @@ public class LibraryApplication {
     }
 
 
-    private void librarian() {
+    public void librarian() {
         String operation;
         System.out.println("What are you going to do today?"
                 + "\n[1] I want to add a book"
@@ -117,7 +122,8 @@ public class LibraryApplication {
 
     }
 
-    private void addABook() {
+    public void addABook() {
+
         System.out.println("Please enter the name of the book: ");
         book.setName(scanner.nextLine());
         System.out.println("Please enter the author's name: ");
@@ -128,7 +134,7 @@ public class LibraryApplication {
     }
 
     //
-    private String getTheInformation() {
+    public String getTheInformation() {
 
         System.out.println("Please enter the name of the book: ");
         String bookName = scanner.nextLine();
@@ -170,18 +176,16 @@ public class LibraryApplication {
     //assuming there is only one book with a name and a author's name
     //   and a customer has a unique name
 
-    private void returnABook() {
+    public void returnABook() {
 
         ArrayList<String> partOfLine = splitOnSpace(getTheInformation());
         String bookName = partOfLine.get(0);
         String authorName = partOfLine.get(1);
         String customerName = partOfLine.get(2);
         String phoneNumber = partOfLine.get(3);
-        Customer customer;
-
         try {
-            customer = library.findACustomer(customerName, phoneNumber);
-            Book normalBook = null;
+            Customer customer = library.findACustomer(customerName, phoneNumber);
+            Book normalBook;
             normalBook = library.findABook(bookName, authorName);
             customer.returnBook(normalBook);
             normalBook.setBorrower(null);
@@ -190,6 +194,8 @@ public class LibraryApplication {
         } catch (NothingFoundExceptions nothingFoundExceptions) {
             System.out.println("sorry, you seem not to be registered in the library yet or this book can not be found!")
             ;
+        } finally {
+            System.out.println("Thank you and have a good day!");
         }
 
 
@@ -199,7 +205,7 @@ public class LibraryApplication {
     }
 
 
-    private void seeAllBooks() {
+    public void seeAllBooks() {
         if (library.size == 0) {
             System.out.println("Sorry, no books are in the library right now");
         } else {

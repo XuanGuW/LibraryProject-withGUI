@@ -1,3 +1,4 @@
+import exceptions.NameIsEmptyString;
 import model.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,11 @@ public class LibraryTest {
     Library library;
     @BeforeEach
     public void before(){
-        b = new NormalBook("","");
+        try {
+            b = new NormalBook("name","author");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("Book name should not be empty");
+        }
         library = new Library();}
 
 

@@ -1,3 +1,4 @@
+import exceptions.NameIsEmptyString;
 import model.NormalBook;
 import ui.Library;
 
@@ -23,9 +24,17 @@ public class SaverTest {
     @BeforeEach
     void before(){
         library = new Library();
-        b = new NormalBook("ASongOfIceAndFire","GeorgeR.R.Martin");
+        try {
+            b = new NormalBook("ASongOfIceAndFire","GeorgeR.R.Martin");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("Book name should not be empty");
+        }
         library.addABook(b);
-        b2 = new NormalBook("HarryPotter","J.K.Rolling");
+        try {
+            b2 = new NormalBook("HarryPotter","J.K.Rolling");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("Book name should not be empty");
+        }
 
     }
 
