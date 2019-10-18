@@ -4,18 +4,18 @@ public interface Book {
 
 
     //EFFECTS: get the author
-    public String getAuthor();
+    String getAuthor();
 
 
     //EFFECTS: get the name of book
-    public String getName();
+    String getName();
 
 
     //EFFECTS: set name
-    public void setName(String name);
+    void setName(String name);
 
     //EFFECTS: set author
-    public void setAuthor(String author);
+    void setAuthor(String author);
 
 
     //EFFECTS: return the availability

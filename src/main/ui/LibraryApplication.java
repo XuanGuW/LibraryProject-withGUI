@@ -1,12 +1,17 @@
 package ui;
 
 
+import exceptions.CustomerNotFoundException;
+import exceptions.NoBookIsFound;
+import exceptions.NothingFoundExceptions;
 import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static ui.Loader.splitOnSpace;
 
 
 public class LibraryApplication {
@@ -19,12 +24,14 @@ public class LibraryApplication {
     private List<Book> myBooks;
     private List<Customer> customerList = new ArrayList<>();
 
-    private Book book = new NormalBook("", "");
+    private Book book;
     private String text;
 
 
     // not know how to store boolean and number value and return it
     public LibraryApplication() throws IOException {
+
+        book = new NormalBook("name","author");
 
         text = "books.txt";
         scanner = new Scanner(System.in);
@@ -73,7 +80,7 @@ public class LibraryApplication {
         operation = scanner.nextLine();
         if (operation.equals("1")) {
             System.out.println("Are you a new customer?" + "\n[1]Yes" + "\n[2]No");
-            if (scanner.nextLine() == "2") {
+            if (scanner.nextLine().equals("2")) {
                 loanABook();
             } else {
                 completeCustomerInformation();
@@ -121,51 +128,73 @@ public class LibraryApplication {
     }
 
     //
-    private void loanABook() {
+    private String getTheInformation() {
 
-        Customer customer;
         System.out.println("Please enter the name of the book: ");
         String bookName = scanner.nextLine();
         System.out.println("Please enter the author's name: ");
         String authorName = scanner.nextLine();
         System.out.println("Please enter your name: ");
         String customerName = scanner.nextLine();
-        System.out.println("Please enter your phone: ");
+        System.out.println("Please enter your phone number: ");
         String phoneNumber = scanner.nextLine();
-        System.out.println("Thank you! " + "\n You can keep the book for 20 days");
-        customer = library.findACustomer(customerName, phoneNumber);
-        book = library.findABook(bookName, authorName);
-        book.setBorrower(customer);
-        book.setAvailability(false);
-        customer.borrow(book);
+        return bookName + " " + authorName + " " + customerName + " " + phoneNumber + " ";
 
 
     }
+
+
+    public void loanABook() {
+
+        ArrayList<String> partOfLine = splitOnSpace(getTheInformation());
+        String bookName = partOfLine.get(0);
+        String authorName = partOfLine.get(1);
+        String customerName = partOfLine.get(2);
+        String phoneNumber = partOfLine.get(3);
+        Customer customer;
+
+        try {
+            customer = library.findACustomer(customerName, phoneNumber);
+            book = library.findABook(bookName, authorName);
+            book.setBorrower(customer);
+            book.setAvailability(false);
+            customer.borrow(book);
+            System.out.println("Thank you! " + "\n You can keep the book for 20 days");
+        } catch (NothingFoundExceptions e) {
+            System.out.println("sorry, you seem not to be registered in the library yet or this book can not be found!")
+            ;
+        }
+    }
+
 
     //assuming there is only one book with a name and a author's name
     //   and a customer has a unique name
 
     private void returnABook() {
 
+        ArrayList<String> partOfLine = splitOnSpace(getTheInformation());
+        String bookName = partOfLine.get(0);
+        String authorName = partOfLine.get(1);
+        String customerName = partOfLine.get(2);
+        String phoneNumber = partOfLine.get(3);
+        Customer customer;
+
+        try {
+            customer = library.findACustomer(customerName, phoneNumber);
+            Book normalBook = null;
+            normalBook = library.findABook(bookName, authorName);
+            customer.returnBook(normalBook);
+            normalBook.setBorrower(null);
+            normalBook.setAvailability(true);
+
+        } catch (NothingFoundExceptions nothingFoundExceptions) {
+            System.out.println("sorry, you seem not to be registered in the library yet or this book can not be found!")
+            ;
+        }
 
 
-        System.out.println("Please enter the name of the book: ");
-        String bookName = scanner.nextLine();
-        System.out.println("Please enter the author's name: ");
-        String authorName = scanner.nextLine();
-        System.out.println("Please enter your name: ");
-        String customerName = scanner.nextLine();
-        System.out.println("Please enter your telephone number");
-        String phoneNumber = scanner.nextLine();
 
-        Customer customer = library.findACustomer(customerName, phoneNumber);
-        Book normalBook = library.findABook(bookName, authorName);
 
-        System.out.println("This book is returned to the library. Thank you! ");
-
-        customer.returnBook(normalBook);
-        normalBook.setBorrower(null);
-        normalBook.setAvailability(true);
 
     }
 
@@ -175,7 +204,7 @@ public class LibraryApplication {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");
-            library.getAvailableBooksList();
+            library.getBooksNames();
 
         }
     }

@@ -9,12 +9,10 @@ public class Magazine extends AbstractBook {
         this.publicationYear = publicationYear;
     }
 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return  name + " " + publicationYear;
+    }
 
 
 }

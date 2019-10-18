@@ -16,7 +16,6 @@ public class Customer {
     //REQUIRES: the book is in the library
     //MODIFIES: book and this
     //EFFECTS: a customer borrow a book
-
     public void borrow(Book book) {
         if (book.getBorrower() == null) {
             book.setAvailability(false);
@@ -40,6 +39,31 @@ public class Customer {
         }
     }
 
+
+    public String toString() {
+        return (name + " " + phoneNumber);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setMyBooks(List<Book> books) {
+        this.myBooks = books;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public List<Book> getMyBooks() {
         return myBooks;
