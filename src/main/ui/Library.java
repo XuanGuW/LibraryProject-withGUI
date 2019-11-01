@@ -8,18 +8,36 @@ import model.Customer;
 import model.NormalBook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Library {
-    private List<Book> availableBooks;
+    private Map<String, Book> libraryBooks;
+    private Map<String, Customer> libraryCustomers;
+
+
+
     private List<Customer> customerList;
 
 
     public Library() {
-        this.availableBooks = new ArrayList();
+        this.libraryBooks = new HashMap<>();
+        this.libraryCustomers = new HashMap<>();
+
+
         this.customerList = new ArrayList<>();
 
 
+
+    }
+
+    public Map<String, Book> getLibraryBooks() {
+        return libraryBooks;
+    }
+
+    public void setLibraryBooks(Map<String, Book> libraryBooks) {
+        this.libraryBooks = libraryBooks;
     }
 
 
@@ -32,40 +50,23 @@ public class Library {
             System.out.println("this book is already in the library");
         } catch (NoBookIsFound noBookIsFound) {
             Book b = new NormalBook(bookName,authorName);
-            availableBooks.add(b);
+            libraryBooks.put(bookName,b);
         }
 
     }
-
-
-    public List<Book> getAvailableBooks() {
-        return availableBooks;
-    }
-
-
-    public void setAvailableBooks(List<Book> availableBooks) {
-        this.availableBooks = availableBooks;
-    }
-
 
 
     //REQUIRES: there are books in the library
     //MODIFIES: this
     //EFFECTS: print out a list of books
     public void getBooksNames() {
-        for (Book b : availableBooks) {
-            System.out.println("Book name: " + "<" + b.getName() + ">" + "\nAuthor's name: " + b.getAuthor());
-        }
+        System.out.println(libraryBooks.keySet());
     }
 
 
     public Book findABook(String bookName, String authorName) throws NoBookIsFound {
-        Book bookWanted = null;
-        for (Book b : availableBooks) {
-            if (b.getName().equals(bookName) && b.getAuthor().equals(authorName)) {
-                bookWanted = b;
-            }
-        }
+        Book bookWanted = libraryBooks.get(bookName);
+
 
         if (bookWanted == null) {
             throw new NoBookIsFound();

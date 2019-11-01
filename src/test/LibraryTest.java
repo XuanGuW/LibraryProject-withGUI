@@ -23,7 +23,7 @@ public class LibraryTest {
 
     public void testAddANewBook() {
         //check the book is not in the library
-        assertEquals(library.getAvailableBooks().size(), 0);
+        assertEquals(library.getLibraryBooks().size(), 0);
 
         //add the book
         try {
@@ -62,7 +62,7 @@ public class LibraryTest {
         }
 
         //check the book is in the library
-        assertEquals(1, library.getAvailableBooks().size());
+        assertEquals(1, library.getLibraryBooks().size());
 
         //add the book again
         try {
@@ -72,21 +72,22 @@ public class LibraryTest {
         }
 
         //check the book only appears once in the library
-        assertEquals(1, library.getAvailableBooks().size());
+        assertEquals(1, library.getLibraryBooks().size());
 
 
     }
 
     @Test
-    public void testLibraryGetBooks(){
+    public void testLibraryGetBooks() throws NameIsEmptyString {
         try {
             library.addABook("name","author");
+            assertTrue(library.getLibraryBooks().get("name").equals(new NormalBook("name","author")));
         } catch (NameIsEmptyString emptyString) {
             fail();
         }
 
-        assertTrue(library.getAvailableBooks().get(0).getName().equals("name"));
-        assertTrue(library.getAvailableBooks().get(0).getAuthor().equals("author"));
+
+
     }
 
 

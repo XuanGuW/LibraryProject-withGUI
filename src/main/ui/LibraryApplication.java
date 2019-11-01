@@ -6,9 +6,7 @@ import exceptions.NothingFoundExceptions;
 import model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static ui.Loader.splitOnSpace;
 
@@ -19,7 +17,7 @@ public class LibraryApplication {
     private Saver saver = new Saver();
     private Scanner scanner;
     private Library library = new Library();
-    private List<Book> books;
+    private Map<String, Book> books;
     private List<Customer> customerList;
 
     private Book book;
@@ -37,9 +35,9 @@ public class LibraryApplication {
         }
         text1 = "books.txt";
         text2 = "customers.txt";
-        books = Loader.load(library.getAvailableBooks(), text1);
+        books = Loader.load(library.getLibraryBooks(), text1);
         customerList = Loader.loadCustomers(text2);
-        library.setAvailableBooks(books);
+        library.setLibraryBooks(books);
         processOperations();
     }
 
@@ -55,7 +53,7 @@ public class LibraryApplication {
             scanner = new Scanner(System.in);
             identity = scanner.nextLine();
             identityHelper(identity);
-            saver.save(library.getAvailableBooks(), text1);
+            saver.save(library.getLibraryBooks(), text1);
             saver.save(customerList);
             break;
 
@@ -95,7 +93,7 @@ public class LibraryApplication {
 
     //EFFECTS: create a new customer object with information, add it to customer list
     private void completeCustomerInformation() {
-        books = new ArrayList<>();
+        books = new HashMap<>();
         System.out.println("what is your name?");
         String customerName = scanner.nextLine();
         System.out.println("what is your phoneNumber");
@@ -223,7 +221,7 @@ public class LibraryApplication {
     }
 
     private void seeAllBooks() {
-        if (library.getAvailableBooks().size() == 0) {
+        if (library.getLibraryBooks().size() == 0) {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");

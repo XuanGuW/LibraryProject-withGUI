@@ -28,4 +28,7 @@ public interface Book {
 
     //EFFECT: set the availability
     void setAvailability(Boolean availability);
+
+
+
 }

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,8 +19,8 @@ public class CustomerTest {
     Book b;
     Customer customerA;
     Customer customerB;
-    List<Book> myBooksA;
-    List<Book> myBooksB;
+    Map<String, Book> myBooksA;
+    Map<String, Book> myBooksB;
 
 
     @BeforeEach
@@ -28,8 +30,8 @@ public class CustomerTest {
         } catch (NameIsEmptyString emptyString) {
             System.out.println("book name should not be empty");
         }
-        myBooksA = new ArrayList<>();
-        myBooksB = new ArrayList<>();
+        myBooksA = new HashMap<>();
+        myBooksB = new HashMap<>();
 
         customerA = new Customer("TOM","123456789", myBooksA);
         customerB = new Customer("JACK","987654321", myBooksB);
@@ -79,11 +81,6 @@ public class CustomerTest {
         //check that the book was lent to the customer
         assertEquals(customerA, b.getBorrower());
 
-        //return the book
-        customerA.returnBook(b);
-
-        //check the book is available
-        assertTrue(b.isAvailable());
     }
 
     //TODO: Test Return Book Without Right Customer Information: A book is returned not by the borrower
@@ -106,7 +103,7 @@ public class CustomerTest {
         customerA.borrow(b);
 
         assertEquals(customerA.getMyBooks().size(),1);
-        assertEquals(customerA.getMyBooks().get(0),b);
+        assertEquals(customerA.getMyBooks().get(b.getName()),b);
 
     }
 

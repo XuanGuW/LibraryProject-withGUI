@@ -8,14 +8,12 @@ import model.NormalBook;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Loader {
 
 
-    public static List<Book> load(List<Book> bookList, String text) throws IOException {
+    public static Map<String, Book> load(Map<String, Book> bookList, String text) throws IOException {
         List<String> lineOfStrings = Files.readAllLines(Paths.get(text));
         for (String string : lineOfStrings) {
             try {
@@ -23,7 +21,7 @@ public class Loader {
                 Book b = new NormalBook("name","author");
                 b.setName(partsOfLine.get(0));
                 b.setAuthor(partsOfLine.get(1));
-                bookList.add(b);
+                bookList.put(b.getName(),b);
             } catch (NameIsEmptyString emptyString) {
                 System.out.println("Book name should not be empty");
             }

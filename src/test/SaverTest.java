@@ -29,7 +29,7 @@ public class SaverTest {
         } catch (NameIsEmptyString emptyString) {
             System.out.println("Book name should not be empty");
         }
-        library.getAvailableBooks().add(b);
+        library.getLibraryBooks().put(b.getName(),b);
         try {
             b2 = new NormalBook("HarryPotter","J.K.Rolling");
         } catch (NameIsEmptyString emptyString) {
@@ -42,21 +42,21 @@ public class SaverTest {
     public void testSaver() throws IOException {
         textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
         textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
-        saver.save(library.getAvailableBooks(),textSave);
-        loader.load(library.getAvailableBooks(),textLoad);
-        assertEquals(library.getAvailableBooks().get(0),b);
+        saver.save(library.getLibraryBooks(),textSave);
+        loader.load(library.getLibraryBooks(),textLoad);
+        assertEquals(library.getLibraryBooks().get(b.getName()),b);
 
     }
 
     @Test
     public void testSaver2Books() throws IOException {
-        library.getAvailableBooks().add(b2);
+        library.getLibraryBooks().put(b2.getName(),b2);
         textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
         textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
-        saver.save(library.getAvailableBooks(),textSave);
-        loader.load(library.getAvailableBooks(),textLoad);
-        assertEquals(library.getAvailableBooks().get(0),b);
-        assertEquals(library.getAvailableBooks().get(1),b2);
+        saver.save(library.getLibraryBooks(),textSave);
+        loader.load(library.getLibraryBooks(),textLoad);
+        assertEquals(library.getLibraryBooks().get(b.getName()),b);
+        assertEquals(library.getLibraryBooks().get(b2.getName()),b2);
 
 
     }

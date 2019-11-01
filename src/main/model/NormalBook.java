@@ -19,5 +19,4 @@ public class NormalBook extends AbstractBook {
 
 
 
-
 }

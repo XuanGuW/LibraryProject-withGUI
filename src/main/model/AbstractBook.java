@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public abstract class AbstractBook implements Book {
 
     protected String name;
@@ -48,7 +50,11 @@ public abstract class AbstractBook implements Book {
 
     @Override
     public void setBorrower(Customer customer) {
-        this.borrower = customer;
+
+        if (!customer.getMyBooks().containsKey(name)) {
+            this.borrower = customer;
+            borrower.borrow(this);
+        }
     }
 
     @Override
@@ -56,4 +62,22 @@ public abstract class AbstractBook implements Book {
         this.availability = availability;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AbstractBook that = (AbstractBook) o;
+        return name.equals(that.name) && author.equals(that.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, author);
+    }
 }
