@@ -3,11 +3,13 @@ package model;
 import java.util.List;
 
 public class Customer {
-    String name;
-    String phoneNumber;
-    List<Book> myBooks;
+    private String name;
+    private String phoneNumber;
+    private List<Book> myBooks;
 
     public Customer(String name, String phoneNumber, List<Book> myBooks) {
+
+
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.myBooks = myBooks;

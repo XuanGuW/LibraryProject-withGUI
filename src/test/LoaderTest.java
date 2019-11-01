@@ -30,16 +30,16 @@ public class LoaderTest {
         } catch (NameIsEmptyString emptyString) {
             System.out.println("Book name should not be empty");
         }
-        library.addABook(b);
+        library.getAvailableBooks().add(b);
 
     }
 
     @Test
     public void testSaver() throws IOException {
-        saver.save(library.getAvailableBooksList(),textSave);
+        saver.save(library.getAvailableBooks(),textSave);
 
-        loader.load(library.getAvailableBooksList(),textLoad);
-        assertEquals(library.getAvailableBooksList().get(0),b);
+        loader.load(library.getAvailableBooks(),textLoad);
+        assertEquals(library.getAvailableBooks().get(0),b);
     }
 
 

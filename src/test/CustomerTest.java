@@ -57,7 +57,7 @@ public class CustomerTest {
     //TODO: Test Borrow Book Unavailable : A customer borrow a book unavailable(already lent to others)
     //TODO: outcome: the book is still borrowed by the previous customer
     @Test
-    public void testBorrowBookUnavailable() {
+    void testBorrowBookUnavailable() {
         customerB.borrow(b);
         //check that the book is unavailable
         assertFalse(b.isAvailable());

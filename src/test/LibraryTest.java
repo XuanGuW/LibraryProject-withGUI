@@ -1,4 +1,5 @@
 import exceptions.NameIsEmptyString;
+import exceptions.NoBookIsFound;
 import model.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,15 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
 
-    NormalBook b;
     Library library;
     @BeforeEach
     public void before(){
-        try {
-            b = new NormalBook("name","author");
-        } catch (NameIsEmptyString emptyString) {
-            System.out.println("Book name should not be empty");
-        }
         library = new Library();}
 
 
@@ -28,13 +23,21 @@ public class LibraryTest {
 
     public void testAddANewBook() {
         //check the book is not in the library
-        assertEquals(library.booksNumber(), 0);
+        assertEquals(library.getAvailableBooks().size(), 0);
 
         //add the book
-        library.addABook(b);
+        try {
+            library.addABook("name","author");
+        } catch (NameIsEmptyString emptyString) {
+            fail();
+        }
 
         //check the book is added to the library
-        assertTrue(library.contains(b));
+        try {
+            library.findABook("name","author");
+        } catch (NoBookIsFound noBookIsFound) {
+            fail();
+        }
 
 
     }
@@ -45,27 +48,45 @@ public class LibraryTest {
     //TODO: outcome: the book will only be added once
     public void testAddAnExistingBook() {
         //check the book is not in the library
-        assertFalse(library.contains(b));
+        try {
+            library.findABook("name","author");
+        } catch (NoBookIsFound noBookIsFound) {
+
+        }
 
         //add the book
-        library.addABook(b);
+        try {
+            library.addABook("name","author");
+        } catch (NameIsEmptyString emptyString) {
+            fail();
+        }
 
         //check the book is in the library
-        assertEquals(1, library.booksNumber());
+        assertEquals(1, library.getAvailableBooks().size());
 
         //add the book again
-        library.addABook(b);
+        try {
+            library.addABook("name","author");
+        } catch (NameIsEmptyString emptyString) {
+            fail();
+        }
 
         //check the book only appears once in the library
-        assertEquals(1, library.booksNumber());
+        assertEquals(1, library.getAvailableBooks().size());
 
 
     }
 
     @Test
     public void testLibraryGetBooks(){
-        library.addABook(b);
-        assertTrue(library.getAvailableBooksList().contains(b));
+        try {
+            library.addABook("name","author");
+        } catch (NameIsEmptyString emptyString) {
+            fail();
+        }
+
+        assertTrue(library.getAvailableBooks().get(0).getName().equals("name"));
+        assertTrue(library.getAvailableBooks().get(0).getAuthor().equals("author"));
     }
 
 

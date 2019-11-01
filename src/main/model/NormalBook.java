@@ -10,8 +10,6 @@ public class NormalBook extends AbstractBook {
         if (name.equals("")) {
             throw new NameIsEmptyString();
         }
-
-
         this.name = name;
         this.author = author;
         this.borrower = null;

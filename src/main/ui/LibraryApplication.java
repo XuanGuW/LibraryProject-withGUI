@@ -1,9 +1,7 @@
 package ui;
 
 
-import exceptions.CustomerNotFoundException;
 import exceptions.NameIsEmptyString;
-import exceptions.NoBookIsFound;
 import exceptions.NothingFoundExceptions;
 import model.*;
 
@@ -19,14 +17,14 @@ public class LibraryApplication {
 
 
     private Saver saver = new Saver();
-    private Loader loader = new Loader();
     private Scanner scanner;
     private Library library = new Library();
-    private List<Book> myBooks;
-    private List<Customer> customerList = new ArrayList<>();
+    private List<Book> books;
+    private List<Customer> customerList;
 
     private Book book;
-    private String text;
+    private String text1;
+    private String text2;
 
 
     // not know how to store boolean and number value and return it
@@ -37,16 +35,15 @@ public class LibraryApplication {
         } catch (NameIsEmptyString nameIsEmptyString) {
             System.out.println("the name of the book should not be empty");
         }
-
-        text = "books.txt";
-        scanner = new Scanner(System.in);
-
-        myBooks = loader.load(library.getAvailableBooksList(), text);
-        library.setAvailableBooksList(myBooks);
+        text1 = "books.txt";
+        text2 = "customers.txt";
+        books = Loader.load(library.getAvailableBooks(), text1);
+        customerList = Loader.loadCustomers(text2);
+        library.setAvailableBooks(books);
         processOperations();
     }
 
-    public void processOperations() throws IOException {
+    private void processOperations() throws IOException {
 
         String identity = "";
         while (true) {
@@ -55,10 +52,11 @@ public class LibraryApplication {
                     + "\n[2] I am a librarian "
                     + "\n[3] Quit."
             );
-
+            scanner = new Scanner(System.in);
             identity = scanner.nextLine();
             identityHelper(identity);
-            saver.save(library.getAvailableBooksList(), text);
+            saver.save(library.getAvailableBooks(), text1);
+            saver.save(customerList);
             break;
 
         }
@@ -67,7 +65,7 @@ public class LibraryApplication {
 
 
 
-    public void identityHelper(String identity) {
+    private void identityHelper(String identity) {
 
         if (identity.equals("1")) {
             customer();
@@ -77,7 +75,7 @@ public class LibraryApplication {
     }
 
 
-    public void customer() {
+    private void customer() {
         String operation;
         System.out.println("What are you going to do today?"
                 + "\n [1] I want to borrow a book"
@@ -95,20 +93,20 @@ public class LibraryApplication {
         }
     }
 
-    // create a new customer object with information, add it to customer list
-    public void completeCustomerInformation() {
-        myBooks = new ArrayList<>();
+    //EFFECTS: create a new customer object with information, add it to customer list
+    private void completeCustomerInformation() {
+        books = new ArrayList<>();
         System.out.println("what is your name?");
         String customerName = scanner.nextLine();
         System.out.println("what is your phoneNumber");
         String customerPhoneNumber = scanner.nextLine();
-        Customer customer = new Customer(customerName,customerPhoneNumber, myBooks);
+        Customer customer = new Customer(customerName,customerPhoneNumber, books);
         customerList.add(customer);
 
     }
 
 
-    public void librarian() {
+    private void librarian() {
         String operation;
         System.out.println("What are you going to do today?"
                 + "\n[1] I want to add a book"
@@ -122,37 +120,61 @@ public class LibraryApplication {
 
     }
 
-    public void addABook() {
+    private void addABook() {
 
         System.out.println("Please enter the name of the book: ");
-        book.setName(scanner.nextLine());
+        String bookName = scanner.nextLine();
+        book.setName(bookName);
         System.out.println("Please enter the author's name: ");
-        book.setName(scanner.nextLine());
-        System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
-        library.addABook(book);
+        String authorName = scanner.nextLine();
+        book.setAuthor(authorName);
+
+        try {
+            library.addABook(bookName,authorName);
+            System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
+        } catch (NameIsEmptyString emptyString) {
+            System.out.println("the name of the book can not be empty!");
+        }
+
+
+
+
 
     }
 
-    //
-    public String getTheInformation() {
+    //EFFECTS: get information for future operation between a book and a customer
+    private String getInformation() {
 
+        String bookInformation = getBookInformation();
+        String customerInformation = getCustomerInformation();
+        return  bookInformation + " " + customerInformation;
+
+    }
+
+    private String getBookInformation() {
         System.out.println("Please enter the name of the book: ");
         String bookName = scanner.nextLine();
         System.out.println("Please enter the author's name: ");
         String authorName = scanner.nextLine();
+        return bookName + " " + authorName;
+    }
+
+    private String getCustomerInformation() {
+
         System.out.println("Please enter your name: ");
         String customerName = scanner.nextLine();
         System.out.println("Please enter your phone number: ");
         String phoneNumber = scanner.nextLine();
-        return bookName + " " + authorName + " " + customerName + " " + phoneNumber + " ";
-
+        return customerName + phoneNumber;
 
     }
 
 
-    public void loanABook() {
 
-        ArrayList<String> partOfLine = splitOnSpace(getTheInformation());
+
+    private void loanABook() {
+
+        ArrayList<String> partOfLine = splitOnSpace(getInformation());
         String bookName = partOfLine.get(0);
         String authorName = partOfLine.get(1);
         String customerName = partOfLine.get(2);
@@ -176,9 +198,9 @@ public class LibraryApplication {
     //assuming there is only one book with a name and a author's name
     //   and a customer has a unique name
 
-    public void returnABook() {
+    private void returnABook() {
 
-        ArrayList<String> partOfLine = splitOnSpace(getTheInformation());
+        ArrayList<String> partOfLine = splitOnSpace(getInformation());
         String bookName = partOfLine.get(0);
         String authorName = partOfLine.get(1);
         String customerName = partOfLine.get(2);
@@ -198,15 +220,10 @@ public class LibraryApplication {
             System.out.println("Thank you and have a good day!");
         }
 
-
-
-
-
     }
 
-
-    public void seeAllBooks() {
-        if (library.size == 0) {
+    private void seeAllBooks() {
+        if (library.getAvailableBooks().size() == 0) {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");
@@ -214,8 +231,6 @@ public class LibraryApplication {
 
         }
     }
-
-
 
 
 }
