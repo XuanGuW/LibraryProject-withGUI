@@ -184,7 +184,7 @@ public class LibraryApplication {
         try {
             customer = library.findACustomer(customerName, phoneNumber);
             book = library.findABook(bookName, authorName);
-            book.borrowing(customer);
+            book.setCustomer(customer);
             book.setAvailability(false);
             customer.borrow(book);
             System.out.println("Thank you! " + "\n You can keep the book for 20 days");
@@ -210,7 +210,7 @@ public class LibraryApplication {
             Book normalBook;
             normalBook = library.findABook(bookName, authorName);
             customer.returnBook(normalBook);
-            normalBook.borrowing(null);
+            normalBook.setCustomer(null);
             normalBook.setAvailability(true);
 
         } catch (NothingFoundExceptions nothingFoundExceptions) {

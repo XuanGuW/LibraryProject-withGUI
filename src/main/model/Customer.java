@@ -23,7 +23,7 @@ public class Customer {
     public void borrow(Book book) {
         if (book.getBorrower() == null) {
             book.setAvailability(false);
-            book.borrowing(this);
+            book.setCustomer(this);
             myBooks.put(book.getName(),book);
         } else {
             System.out.println("Sorry, this book is not available right now.");
@@ -38,7 +38,7 @@ public class Customer {
         if (book.getBorrower().getName().equals(name)) {
 
             book.setAvailability(true);
-            book.borrowing(null);
+            book.setCustomer(null);
             myBooks.remove(book.getName());
 
 

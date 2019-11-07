@@ -27,7 +27,7 @@ class NormalBookTest {
         normalBook = new NormalBook("name","author");
         normalBook.setName("Book");
         normalBook.setAuthor("Author");
-        normalBook.setBorrower(customer);
+        normalBook.setCustomer(customer);
         assertEquals("Book",normalBook.getName());
         assertEquals("Author",normalBook.getAuthor());
         assertEquals(customer,normalBook.getBorrower());
