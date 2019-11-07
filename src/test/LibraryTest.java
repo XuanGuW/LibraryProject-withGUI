@@ -81,14 +81,13 @@ public class LibraryTest {
     public void testLibraryGetBooks() throws NameIsEmptyString {
         try {
             library.addABook("name","author");
-            assertTrue(library.getLibraryBooks().get("name").equals(new NormalBook("name","author")));
+            assertEquals(library.getLibraryBooks().get("name" + " " + "author"), new NormalBook("name", "author"));
         } catch (NameIsEmptyString emptyString) {
             fail();
         }
 
-
-
     }
+
 
 
 

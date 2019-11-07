@@ -19,13 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
+class ExceptionTest {
 
-public class ExceptionTest {
-
-    Book book;
+    private Book book;
 
     @Test
-    public void testEmptyStringNameNotEmpty(){
+    void testEmptyStringNameNotEmpty(){
         try {book = new NormalBook("name","author");
 
     } catch (NameIsEmptyString e) {
@@ -35,7 +34,7 @@ public class ExceptionTest {
     }
 
     @Test
-    public void testEmptyStringNameWhenEmpty() {
+    void testEmptyStringNameWhenEmpty() {
         //expect the book name is empty string
         try {
             book = new NormalBook("","");

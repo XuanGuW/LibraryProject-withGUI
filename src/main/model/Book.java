@@ -23,11 +23,14 @@ public interface Book {
     //EFFECTS: A customer borrow a book
     Customer getBorrower();
 
-    //EFFECT: set the borrower
-    void setBorrower(Customer customer);
+    //EFFECT: a customer borrows a book
+    void borrowing(Customer customer);
 
     //EFFECT: set the availability
     void setAvailability(Boolean availability);
+
+    //EFFECTS: set the borrower
+    void setBorrower(Customer customer);
 
 
 

@@ -1,29 +1,29 @@
 package model;
 
-import java.util.List;
+
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Customer {
     private String name;
     private String phoneNumber;
     private Map<String, Book> myBooks;
 
-    public Customer(String name, String phoneNumber, Map<String, Book> myBooks) {
-
+    public Customer(String name, String phoneNumber) {
 
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.myBooks = myBooks;
+        this.myBooks = new HashMap<>();
     }
 
     //REQUIRES: the book is in the library
     //MODIFIES: book and this
     //EFFECTS: a customer borrow a book
     public void borrow(Book book) {
-
         if (book.getBorrower() == null) {
             book.setAvailability(false);
-            book.setBorrower(this);
+            book.borrowing(this);
             myBooks.put(book.getName(),book);
         } else {
             System.out.println("Sorry, this book is not available right now.");
@@ -34,9 +34,11 @@ public class Customer {
     //MODIFIES: book and this and book.getBorrower
     //EFFECTS: return a book to the library
     public void returnBook(Book book) {
-        if (book.getBorrower().getName().equals(name) && book.getBorrower().getPhoneNumber().equals(phoneNumber)) {
+
+        if (book.getBorrower().getName().equals(name)) {
+
             book.setAvailability(true);
-            book.setBorrower(null);
+            book.borrowing(null);
             myBooks.remove(book.getName());
 
 
@@ -71,6 +73,25 @@ public class Customer {
 
     public Map<String, Book> getMyBooks() {
         return myBooks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Customer)) {
+            return false;
+        }
+        Customer customer = (Customer) o;
+        return name.equals(customer.name)
+                && phoneNumber.equals(customer.phoneNumber)
+                && Objects.equals(myBooks, customer.myBooks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phoneNumber, myBooks);
     }
 }
 

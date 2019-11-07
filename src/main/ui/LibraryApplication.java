@@ -18,7 +18,7 @@ public class LibraryApplication {
     private Scanner scanner;
     private Library library = new Library();
     private Map<String, Book> books;
-    private List<Customer> customerList;
+    private Map<String, Customer> customers;
 
     private Book book;
     private String text1;
@@ -35,9 +35,10 @@ public class LibraryApplication {
         }
         text1 = "books.txt";
         text2 = "customers.txt";
-        books = Loader.load(library.getLibraryBooks(), text1);
-        customerList = Loader.loadCustomers(text2);
+        books = Loader.loadBooks(library.getLibraryBooks(), text1);
+        customers = Loader.loadCustomers(library.getLibraryCustomers(),text2);
         library.setLibraryBooks(books);
+        library.setLibraryCustomers(customers);
         processOperations();
     }
 
@@ -53,8 +54,8 @@ public class LibraryApplication {
             scanner = new Scanner(System.in);
             identity = scanner.nextLine();
             identityHelper(identity);
-            saver.save(library.getLibraryBooks(), text1);
-            saver.save(customerList);
+            Saver.saveBook(library.getLibraryBooks(), text1);
+            Saver.saveCustomer(library.getLibraryCustomers(), text2);
             break;
 
         }
@@ -98,8 +99,9 @@ public class LibraryApplication {
         String customerName = scanner.nextLine();
         System.out.println("what is your phoneNumber");
         String customerPhoneNumber = scanner.nextLine();
-        Customer customer = new Customer(customerName,customerPhoneNumber, books);
-        customerList.add(customer);
+        Customer customer = new Customer(customerName,customerPhoneNumber);
+        customer.setMyBooks(books);
+        customers.put(customerName + " " + customerPhoneNumber,customer);
 
     }
 
@@ -154,7 +156,7 @@ public class LibraryApplication {
         String bookName = scanner.nextLine();
         System.out.println("Please enter the author's name: ");
         String authorName = scanner.nextLine();
-        return bookName + " " + authorName;
+        return " " + bookName + " " + authorName;
     }
 
     private String getCustomerInformation() {
@@ -182,7 +184,7 @@ public class LibraryApplication {
         try {
             customer = library.findACustomer(customerName, phoneNumber);
             book = library.findABook(bookName, authorName);
-            book.setBorrower(customer);
+            book.borrowing(customer);
             book.setAvailability(false);
             customer.borrow(book);
             System.out.println("Thank you! " + "\n You can keep the book for 20 days");
@@ -208,14 +210,14 @@ public class LibraryApplication {
             Book normalBook;
             normalBook = library.findABook(bookName, authorName);
             customer.returnBook(normalBook);
-            normalBook.setBorrower(null);
+            normalBook.borrowing(null);
             normalBook.setAvailability(true);
 
         } catch (NothingFoundExceptions nothingFoundExceptions) {
             System.out.println("sorry, you seem not to be registered in the library yet or this book can not be found!")
             ;
         } finally {
-            System.out.println("Thank you and have a good day!");
+            System.out.println("Thank you!");
         }
 
     }
