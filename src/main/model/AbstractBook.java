@@ -54,7 +54,7 @@ public abstract class AbstractBook implements Book {
     @Override
     public void setCustomer(Customer customer) {
         if (customer != null) {
-            if (!customer.getMyBooks().containsKey(name)) {
+            if (!customer.getMyBooks().containsKey(name + " " + author)) {
                 this.borrower = customer;
                 customer.borrow(this);
             }

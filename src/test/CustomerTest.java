@@ -63,7 +63,6 @@ class CustomerTest {
         assertEquals(customerA, b.getBorrower());
         //return the book
         customerA.returnBook(b);
-
         assertTrue(b.isAvailable());
 
     }
@@ -104,8 +103,8 @@ class CustomerTest {
     void testEqualAndHashCodeOverrides(){
         assertEquals(customerA,new Customer("TOM","123456789"));
         assertNotEquals(customerA,new Customer("tom","123456789"));
-
-
+        assertEquals(customerA.hashCode(),new Customer("TOM","123456789").hashCode());
+        assertNotEquals(customerA,0);
     }
 
     @Test
