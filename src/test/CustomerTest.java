@@ -18,9 +18,6 @@ class CustomerTest {
     private Book b;
     private Customer customerA;
     private Customer customerB;
-    private Map<String, Book> myBooksA;
-    private Map<String, Book> myBooksB;
-
 
     @BeforeEach
     void before(){
@@ -29,13 +26,9 @@ class CustomerTest {
         } catch (NameIsEmptyString emptyString) {
             System.out.println("book name should not be empty");
         }
-        myBooksA = new HashMap<>();
-        myBooksB = new HashMap<>();
 
         customerA = new Customer("TOM","123456789");
         customerB = new Customer("JACK","987654321");
-
-
     }
 
 
@@ -50,8 +43,6 @@ class CustomerTest {
         //check that the book is borrowed by the customer
         assertFalse(b.isAvailable());
         assertEquals(customerA, b.getBorrower());
-
-
     }
 
 
@@ -112,6 +103,14 @@ class CustomerTest {
         assertEquals("A",customerA.getName());
         assertEquals("123",customerA.getPhoneNumber());
         assertNull(customerA.getMyBooks());
+    }
+
+    @Test
+    void testEqualAndHashCodeOverrides(){
+        assertEquals(customerA,new Customer("TOM","123456789"));
+        assertNotEquals(customerA,new Customer("tom","123456789"));
+
+
     }
 
     @Test

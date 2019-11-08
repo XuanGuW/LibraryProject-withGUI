@@ -15,8 +15,6 @@ class LibraryApplication {
 
     private Scanner scanner;
     private Library library = new Library();
-
-
     private Book book;
     private String text1;
     private String text2;
@@ -215,8 +213,7 @@ class LibraryApplication {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");
-            library.getBooksNames();
-
+            System.out.println(library.getBooksNames());;
         }
     }
 

@@ -6,6 +6,9 @@ import exceptions.NameIsEmptyString;
 import exceptions.NoBookIsFound;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import static sun.tools.jstat.Alignment.keySet;
 
 public class Library {
     private Map<String, Book> libraryBooks;
@@ -25,7 +28,6 @@ public class Library {
         return libraryCustomers;
     }
 
-
     public void setLibraryBooks(Map<String, Book> libraryBooks) {
         this.libraryBooks = libraryBooks;
     }
@@ -35,38 +37,29 @@ public class Library {
 
     }
 
-    //REQUIRES: there are books in the library
     //MODIFIES: this
     //EFFECTS: print out a list of books
-    public void getBooksNames() {
-        System.out.println(libraryBooks.keySet());
+    public Set<String> getBooksNames() {
+        return libraryBooks.keySet();
     }
-
 
     public Book findABook(String bookName, String authorName) throws NoBookIsFound {
         Book bookWanted = libraryBooks.get(bookName + " " + authorName);
-
-
         if (bookWanted == null) {
             throw new NoBookIsFound();
         }
         return bookWanted;
     }
 
-
     //EFFECTS: find the customer with this name
     public Customer findACustomer(String customerName, String phoneNumber) throws CustomerNotFoundException {
 
         Customer customerWanted = libraryCustomers.get(customerName + " " + phoneNumber);
-
         if (customerWanted == null) {
             throw new CustomerNotFoundException();
         }
         return customerWanted;
     }
-
-
-
 
 }
 
