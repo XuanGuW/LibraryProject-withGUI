@@ -17,7 +17,7 @@ public class Saver {
         writer.close();
     }
 
-    static void saveCustomer(Map<String, Customer> customers, String text) throws IOException {
+    public static void saveCustomer(Map<String, Customer> customers, String text) throws IOException {
 
         PrintWriter writer = new PrintWriter(text);
         writer.println(customers.keySet());

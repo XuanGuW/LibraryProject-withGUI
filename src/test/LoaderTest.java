@@ -1,5 +1,4 @@
 
-import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import model.*;
 import static org.junit.jupiter.api.Assertions.*;

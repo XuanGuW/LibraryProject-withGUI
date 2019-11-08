@@ -1,7 +1,6 @@
 package ui;
 
 
-import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import exceptions.NothingFoundExceptions;
 import model.*;
@@ -12,14 +11,11 @@ import java.util.*;
 import static ui.Loader.splitOnSpace;
 
 
-public class LibraryApplication {
+class LibraryApplication {
 
-
-    private Saver saver = new Saver();
     private Scanner scanner;
     private Library library = new Library();
-    private Map<String, Book> books;
-    private Map<String, Customer> customers;
+
 
     private Book book;
     private String text1;
@@ -27,7 +23,7 @@ public class LibraryApplication {
 
 
     // not know how to store boolean and number value and return it
-    public LibraryApplication() throws IOException {
+    LibraryApplication() throws IOException {
 
         try {
             book = new NormalBook("name","author");
@@ -36,10 +32,8 @@ public class LibraryApplication {
         }
         text1 = "books.txt";
         text2 = "customers.txt";
-        books = Loader.loadBooks(library.getLibraryBooks(), text1);
-        customers = Loader.loadCustomers(library.getLibraryCustomers(),text2);
-        library.setLibraryBooks(books);
-        library.setLibraryCustomers(customers);
+        library.setLibraryBooks(Loader.loadBooks(library.getLibraryBooks(), text1));
+        library.setLibraryCustomers(Loader.loadCustomers(library.getLibraryCustomers(),text2));
         processOperations();
     }
 
@@ -95,14 +89,14 @@ public class LibraryApplication {
 
     //EFFECTS: create a new customer object with information, add it to customer list
     private void completeCustomerInformation() {
-        books = new HashMap<>();
+
         System.out.println("what is your name?");
         String customerName = scanner.nextLine();
         System.out.println("what is your phoneNumber");
         String customerPhoneNumber = scanner.nextLine();
         Customer customer = new Customer(customerName,customerPhoneNumber);
-        customer.setMyBooks(books);
-        customers.put(customerName + " " + customerPhoneNumber,customer);
+
+        library.getLibraryCustomers().put(customerName + " " + customerPhoneNumber,customer);
 
     }
 

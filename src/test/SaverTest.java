@@ -1,4 +1,3 @@
-import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import model.NormalBook;
 import model.Library;
