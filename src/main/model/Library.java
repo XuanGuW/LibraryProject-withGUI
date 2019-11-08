@@ -5,7 +5,7 @@ package model;
 import exceptions.NoBookIsFound;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
 
 
 public class Library {
@@ -17,16 +17,8 @@ public class Library {
 
     }
 
-
-
     public Map<String, Book> getLibraryBooks() {
         return libraryBooks;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: print out a list of books
-    public Set<String> getBooksNames() {
-        return libraryBooks.keySet();
     }
 
     public void setLibraryBooks(Map<String, Book> libraryBooks) {

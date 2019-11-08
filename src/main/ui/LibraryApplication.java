@@ -214,7 +214,7 @@ class LibraryApplication {
             System.out.println("Sorry, no books are in the library right now");
         } else {
             System.out.println("These books are in the library: ");
-            System.out.println(library.getBooksNames());;
+            System.out.println(library.getLibraryBooks().keySet());;
         }
     }
 
