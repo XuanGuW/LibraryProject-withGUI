@@ -15,12 +15,13 @@ class LibraryApplication {
 
     private Scanner scanner;
     private Library library = new Library();
+    private Customers customers = new Customers();
     private Book book;
     private String text1;
     private String text2;
 
 
-    // not know how to store boolean and number value and return it
+
     LibraryApplication() throws IOException {
 
         try {
@@ -31,7 +32,7 @@ class LibraryApplication {
         text1 = "books.txt";
         text2 = "customers.txt";
         library.setLibraryBooks(Loader.loadBooks(library.getLibraryBooks(), text1));
-        library.setLibraryCustomers(Loader.loadCustomers(library.getLibraryCustomers(),text2));
+        customers.setCustomers(Loader.loadCustomers(customers.getCustomers(),text2));
         processOperations();
     }
 
@@ -48,7 +49,7 @@ class LibraryApplication {
             identity = scanner.nextLine();
             identityHelper(identity);
             Saver.saveBook(library.getLibraryBooks(), text1);
-            Saver.saveCustomer(library.getLibraryCustomers(), text2);
+            Saver.saveCustomer(customers.getCustomers(), text2);
             break;
 
         }
@@ -94,7 +95,7 @@ class LibraryApplication {
         String customerPhoneNumber = scanner.nextLine();
         Customer customer = new Customer(customerName,customerPhoneNumber);
 
-        library.getLibraryCustomers().put(customerName + " " + customerPhoneNumber,customer);
+        customers.getCustomers().put(customerName + " " + customerPhoneNumber,customer);
 
     }
 
@@ -168,7 +169,7 @@ class LibraryApplication {
         Customer customer;
 
         try {
-            customer = library.findACustomer(customerName, phoneNumber);
+            customer = customers.findACustomer(customerName, phoneNumber);
             book = library.findABook(bookName, authorName);
             book.setCustomer(customer);
             book.setAvailability(false);
@@ -192,7 +193,7 @@ class LibraryApplication {
         String customerName = partOfLine.get(2);
         String phoneNumber = partOfLine.get(3);
         try {
-            Customer customer = library.findACustomer(customerName, phoneNumber);
+            Customer customer = customers.findACustomer(customerName, phoneNumber);
             Book normalBook;
             normalBook = library.findABook(bookName, authorName);
             customer.returnBook(normalBook);

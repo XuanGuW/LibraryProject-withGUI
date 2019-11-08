@@ -3,7 +3,6 @@ package ui;
 import exceptions.NameIsEmptyString;
 import model.Book;
 import model.Customer;
-import model.Magazine;
 import model.NormalBook;
 
 import java.io.IOException;
@@ -32,6 +31,8 @@ public class Loader {
 
     }
 
+
+
     static Map<String, Customer> loadCustomers(Map<String, Customer> customers, String text) throws IOException {
         List<String> lineOfStrings = Files.readAllLines(Paths.get(text));
 
@@ -45,6 +46,7 @@ public class Loader {
         return customers;
 
     }
+
 
 
     static ArrayList<String> splitOnSpace(String line) {

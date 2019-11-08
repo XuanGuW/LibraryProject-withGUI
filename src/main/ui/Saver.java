@@ -15,6 +15,7 @@ public class Saver {
         PrintWriter writer = new PrintWriter(text);
         writer.println(normalBookList.keySet());
         writer.close();
+
     }
 
     public static void saveCustomer(Map<String, Customer> customers, String text) throws IOException {
@@ -22,5 +23,6 @@ public class Saver {
         PrintWriter writer = new PrintWriter(text);
         writer.println(customers.keySet());
         writer.close();
+
     }
 }
