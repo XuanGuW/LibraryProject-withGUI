@@ -35,23 +35,6 @@ public class Library {
 
     }
 
-
-
-
-    //MODIFIES: this
-    //EFFECTS: add a book to the library unless it was already added
-    public void addABook(String bookName, String authorName) throws NameIsEmptyString, BookAlreadyExistException {
-        try {
-            findABook(bookName,authorName);
-            throw new BookAlreadyExistException();
-        } catch (NoBookIsFound noBookIsFound) {
-            Book b = new NormalBook(bookName,authorName);
-            libraryBooks.put(bookName + " " + authorName,b);
-        }
-
-    }
-
-
     //REQUIRES: there are books in the library
     //MODIFIES: this
     //EFFECTS: print out a list of books

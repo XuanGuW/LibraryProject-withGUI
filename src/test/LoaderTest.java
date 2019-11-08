@@ -31,12 +31,8 @@ class LoaderTest {
         } catch (NameIsEmptyString emptyString) {
             System.out.println("Book name should not be empty");
         }
+            library.getLibraryBooks().put(b.getName() + " " + b.getAuthor(),b);
 
-        try {
-            library.addABook(b.getName(),b.getAuthor());
-        } catch (BookAlreadyExistException e) {
-           fail();
-        }
 
     }
 

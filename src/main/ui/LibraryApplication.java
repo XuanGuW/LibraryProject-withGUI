@@ -129,15 +129,9 @@ public class LibraryApplication {
         System.out.println("Please enter the author's name: ");
         String authorName = scanner.nextLine();
         book.setAuthor(authorName);
+        library.getLibraryBooks().put(bookName + " " + authorName,book);
+        System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
 
-        try {
-            library.addABook(bookName,authorName);
-            System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
-        } catch (NameIsEmptyString emptyString) {
-            System.out.println("the name of the book can not be empty!");
-        } catch (BookAlreadyExistException e) {
-            System.out.println("this book already exists in library! ");
-        }
 
 
     }

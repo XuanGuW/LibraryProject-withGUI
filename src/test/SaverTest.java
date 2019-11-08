@@ -35,21 +35,9 @@ public class SaverTest {
             System.out.println("Book name should not be empty");
         }
 
+        library.getLibraryBooks().put(b.getName() + " " + b.getAuthor(),b);
+        library.getLibraryBooks().put(b2.getName() + " " + b2.getAuthor(),b2);
 
-        try {
-            library.addABook(b.getName(),b.getAuthor());
-        } catch (NameIsEmptyString emptyString) {
-            System.out.println("Book name should not be empty");
-        } catch (BookAlreadyExistException e) {
-            e.printStackTrace();
-        }
-        try {
-            library.addABook(b2.getName(),b2.getAuthor());
-        } catch (NameIsEmptyString emptyString) {
-            System.out.println("Book name should not be empty");
-        } catch (BookAlreadyExistException e) {
-            e.printStackTrace();
-        }
 
     }
 
