@@ -50,11 +50,13 @@ class LibraryApplication {
             identityHelper(identity);
             Saver.saveBook(library.getLibraryBooks(), text1);
             Saver.saveCustomer(customers.getCustomers(), text2);
-            break;
+
 
         }
 
     }
+
+
 
 
 
@@ -86,12 +88,14 @@ class LibraryApplication {
         }
     }
 
+
+
     //EFFECTS: create a new customer object with information, add it to customer list
     private void completeCustomerInformation() {
 
-        System.out.println("what is your name?");
+        askNameHelper();
         String customerName = scanner.nextLine();
-        System.out.println("what is your phoneNumber");
+        askPhoneNumberHelper();
         String customerPhoneNumber = scanner.nextLine();
         Customer customer = new Customer(customerName,customerPhoneNumber);
 
@@ -116,10 +120,10 @@ class LibraryApplication {
 
     private void addABook() {
 
-        System.out.println("Please enter the name of the book: ");
+        askBookNameHelper();
         String bookName = scanner.nextLine();
         book.setName(bookName);
-        System.out.println("Please enter the author's name: ");
+        askBookAuthorHelper();
         String authorName = scanner.nextLine();
         book.setAuthor(authorName);
         library.getLibraryBooks().put(bookName + " " + authorName,book);
@@ -139,18 +143,18 @@ class LibraryApplication {
     }
 
     private String getBookInformation() {
-        System.out.println("Please enter the name of the book: ");
+        askBookNameHelper();
         String bookName = scanner.nextLine();
-        System.out.println("Please enter the author's name: ");
+        askBookAuthorHelper();
         String authorName = scanner.nextLine();
         return " " + bookName + " " + authorName;
     }
 
     private String getCustomerInformation() {
 
-        System.out.println("Please enter your name: ");
+        askNameHelper();
         String customerName = scanner.nextLine();
-        System.out.println("Please enter your phone number: ");
+        askPhoneNumberHelper();
         String phoneNumber = scanner.nextLine();
         return customerName + phoneNumber;
 
@@ -218,6 +222,21 @@ class LibraryApplication {
         }
     }
 
+    private void askNameHelper() {
+        System.out.println("what is your name");
+    }
+
+    private void askPhoneNumberHelper() {
+        System.out.println("what is your phoneNumber?");
+    }
+
+    private void askBookNameHelper() {
+        System.out.println("please enter the name of the book");
+    }
+
+    private void askBookAuthorHelper() {
+        System.out.println("please enter the author's name");
+    }
 
 }
 
