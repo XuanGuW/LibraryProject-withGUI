@@ -1,6 +1,7 @@
 package ui;
 
 
+import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import exceptions.NothingFoundExceptions;
 import model.*;
@@ -134,10 +135,9 @@ public class LibraryApplication {
             System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
         } catch (NameIsEmptyString emptyString) {
             System.out.println("the name of the book can not be empty!");
+        } catch (BookAlreadyExistException e) {
+            System.out.println("this book already exists in library! ");
         }
-
-
-
 
 
     }

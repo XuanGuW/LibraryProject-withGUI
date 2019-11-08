@@ -1,6 +1,7 @@
+import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import model.NormalBook;
-import ui.Library;
+import model.Library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,11 +40,15 @@ public class SaverTest {
             library.addABook(b.getName(),b.getAuthor());
         } catch (NameIsEmptyString emptyString) {
             System.out.println("Book name should not be empty");
+        } catch (BookAlreadyExistException e) {
+            e.printStackTrace();
         }
         try {
             library.addABook(b2.getName(),b2.getAuthor());
         } catch (NameIsEmptyString emptyString) {
             System.out.println("Book name should not be empty");
+        } catch (BookAlreadyExistException e) {
+            e.printStackTrace();
         }
 
     }

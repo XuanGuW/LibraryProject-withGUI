@@ -1,10 +1,11 @@
+import exceptions.BookAlreadyExistException;
 import exceptions.NameIsEmptyString;
 import exceptions.NoBookIsFound;
 import model.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.Library;
+import model.Library;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,11 @@ public class LibraryTest {
 
         //add the book
         try {
-            library.addABook("name","author");
+            try {
+                library.addABook("name","author");
+            } catch (BookAlreadyExistException e) {
+                fail();
+            }
         } catch (NameIsEmptyString emptyString) {
             fail();
         }
@@ -46,17 +51,21 @@ public class LibraryTest {
     @Test
     //TODO: Test Add An Existing Book: add a book that was already in the library
     //TODO: outcome: the book will only be added once
-    public void testAddAnExistingBook() {
+    void testAddAnExistingBook() {
         //check the book is not in the library
         try {
             library.findABook("name","author");
-        } catch (NoBookIsFound noBookIsFound) {
+        } catch (NoBookIsFound ignored) {
 
         }
 
         //add the book
         try {
-            library.addABook("name","author");
+            try {
+                library.addABook("name","author");
+            } catch (BookAlreadyExistException e) {
+                fail();
+            }
         } catch (NameIsEmptyString emptyString) {
             fail();
         }
@@ -66,7 +75,11 @@ public class LibraryTest {
 
         //add the book again
         try {
-            library.addABook("name","author");
+            try {
+                library.addABook("name","author");
+            } catch (BookAlreadyExistException e) {
+                System.out.println("pass!");
+            }
         } catch (NameIsEmptyString emptyString) {
             fail();
         }
@@ -78,11 +91,11 @@ public class LibraryTest {
     }
 
     @Test
-    public void testLibraryGetBooks() throws NameIsEmptyString {
+    void testLibraryGetBooks() throws NameIsEmptyString {
         try {
             library.addABook("name","author");
             assertEquals(library.getLibraryBooks().get("name" + " " + "author"), new NormalBook("name", "author"));
-        } catch (NameIsEmptyString emptyString) {
+        } catch (NameIsEmptyString | BookAlreadyExistException emptyString) {
             fail();
         }
 

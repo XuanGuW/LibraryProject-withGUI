@@ -32,7 +32,7 @@ public class Loader {
 
     }
 
-    public static Map<String, Customer> loadCustomers(Map<String, Customer> customers, String text) throws IOException {
+    static Map<String, Customer> loadCustomers(Map<String, Customer> customers, String text) throws IOException {
         List<String> lineOfStrings = Files.readAllLines(Paths.get(text));
 
         for (String string : lineOfStrings) {
@@ -47,7 +47,7 @@ public class Loader {
     }
 
 
-    public static ArrayList<String> splitOnSpace(String line) {
+    static ArrayList<String> splitOnSpace(String line) {
         String[] splits = line.split(" ");
         return new ArrayList<>(Arrays.asList(splits));
     }

@@ -1,11 +1,9 @@
-package ui;
+package model;
 
+import exceptions.BookAlreadyExistException;
 import exceptions.CustomerNotFoundException;
 import exceptions.NameIsEmptyString;
 import exceptions.NoBookIsFound;
-import model.Book;
-import model.Customer;
-import model.NormalBook;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,10 +40,10 @@ public class Library {
 
     //MODIFIES: this
     //EFFECTS: add a book to the library unless it was already added
-    public void addABook(String bookName, String authorName) throws NameIsEmptyString {
+    public void addABook(String bookName, String authorName) throws NameIsEmptyString, BookAlreadyExistException {
         try {
             findABook(bookName,authorName);
-            System.out.println("this book is already in the library");
+            throw new BookAlreadyExistException();
         } catch (NoBookIsFound noBookIsFound) {
             Book b = new NormalBook(bookName,authorName);
             libraryBooks.put(bookName + " " + authorName,b);
@@ -57,7 +55,7 @@ public class Library {
     //REQUIRES: there are books in the library
     //MODIFIES: this
     //EFFECTS: print out a list of books
-    void getBooksNames() {
+    public void getBooksNames() {
         System.out.println(libraryBooks.keySet());
     }
 
@@ -74,9 +72,9 @@ public class Library {
 
 
     //EFFECTS: find the customer with this name
-    Customer findACustomer(String customerName, String phoneNumber) throws CustomerNotFoundException {
+    public Customer findACustomer(String customerName, String phoneNumber) throws CustomerNotFoundException {
 
-        Customer customerWanted = libraryCustomers.get(customerName);
+        Customer customerWanted = libraryCustomers.get(customerName + " " + phoneNumber);
 
         if (customerWanted == null) {
             throw new CustomerNotFoundException();
