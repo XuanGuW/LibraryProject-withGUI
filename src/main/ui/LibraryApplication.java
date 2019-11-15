@@ -221,6 +221,10 @@ class LibraryApplication {
         }
     }
 
+    private void searchForBooks(){
+
+    }
+
     private void askNameHelper() {
         System.out.println("what is your name");
     }
