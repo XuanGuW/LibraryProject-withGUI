@@ -13,8 +13,6 @@ public class Library extends Observable {
 
     private Map<String, Book> libraryBooks;
 
-
-
     public Library() {
         this.libraryBooks = new HashMap<>();
 

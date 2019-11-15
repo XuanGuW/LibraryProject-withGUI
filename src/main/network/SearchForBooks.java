@@ -42,8 +42,8 @@ public class SearchForBooks {
         try {
             JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
             JSONArray itemsArray = (JSONArray) jsonObject.get("items");
-            JSONArray booksInfo = new JSONArray();
-            JSONArray bookNames = new JSONArray();
+            JSONArray booksInfo;
+            JSONArray bookNames;
 
 
             booksInfo = helper(itemsArray,"volumeInfo");

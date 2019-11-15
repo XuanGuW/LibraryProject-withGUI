@@ -50,5 +50,11 @@ public class LibraryTest {
 
     }
 
+    @Test
+    void testAddABook(){
+        libraryEmpty.addABook(book);
+        assertTrue(libraryEmpty.getLibraryBooks().containsKey(book.getName() + " " + book.getAuthor()));
+    }
+
 
 }
