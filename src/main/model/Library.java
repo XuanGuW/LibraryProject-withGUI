@@ -5,11 +5,14 @@ package model;
 import exceptions.NoBookIsFound;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 
+public class Library extends Observable {
 
-public class Library {
     private Map<String, Book> libraryBooks;
+
 
 
     public Library() {
@@ -32,6 +35,13 @@ public class Library {
         }
         return bookWanted;
     }
+
+    public void addABook(Book book) {
+        libraryBooks.put(book.getName() + " " + book.getAuthor(), book);
+        setChanged();
+        notifyObservers(book.getName() + " " + book.getAuthor());
+    }
+
 
 
 }

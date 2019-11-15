@@ -13,6 +13,7 @@ import static ui.Loader.splitOnSpace;
 
 class LibraryApplication {
 
+
     private Scanner scanner;
     private Library library = new Library();
     private Customers customers = new Customers();
@@ -98,8 +99,8 @@ class LibraryApplication {
         askPhoneNumberHelper();
         String customerPhoneNumber = scanner.nextLine();
         Customer customer = new Customer(customerName,customerPhoneNumber);
-
         customers.getCustomers().put(customerName + " " + customerPhoneNumber,customer);
+        library.addObserver(customer);
 
     }
 
@@ -126,9 +127,8 @@ class LibraryApplication {
         askBookAuthorHelper();
         String authorName = scanner.nextLine();
         book.setAuthor(authorName);
-        library.getLibraryBooks().put(bookName + " " + authorName,book);
+        library.addABook(book);
         System.out.println("The book: " + "<" + book.getName() + ">" + " is added to the library.");
-
 
 
     }
@@ -176,7 +176,7 @@ class LibraryApplication {
             customer = customers.findACustomer(customerName, phoneNumber);
             book = library.findABook(bookName, authorName);
             book.setCustomer(customer);
-            book.setAvailability(false);
+
             customer.borrow(book);
             System.out.println("Thank you! " + "\n You can keep the book for 20 days");
         } catch (NothingFoundExceptions e) {
@@ -202,7 +202,6 @@ class LibraryApplication {
             normalBook = library.findABook(bookName, authorName);
             customer.returnBook(normalBook);
             normalBook.setCustomer(null);
-            normalBook.setAvailability(true);
 
         } catch (NothingFoundExceptions nothingFoundExceptions) {
             System.out.println("sorry, you seem not to be registered in the library yet or this book can not be found!")

@@ -1,11 +1,9 @@
 package model;
 
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-public class Customer {
+public class Customer implements Observer {
     private String name;
     private String phoneNumber;
     private Map<String, Book> myBooks;
@@ -22,7 +20,7 @@ public class Customer {
     //EFFECTS: a customer borrow a book
     public void borrow(Book book) {
         if (book.getBorrower() == null) {
-            book.setAvailability(false);
+
             book.setCustomer(this);
             myBooks.put(book.getName(),book);
         } else {
@@ -37,7 +35,7 @@ public class Customer {
 
         if (book.getBorrower().getName().equals(name)) {
 
-            book.setAvailability(true);
+
             book.setCustomer(null);
             myBooks.remove(book.getName());
 
@@ -94,6 +92,11 @@ public class Customer {
     @Override
     public int hashCode() {
         return Objects.hash(name, phoneNumber, myBooks);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("Hello! A new book: " + arg + " is added to the library!");
     }
 }
 

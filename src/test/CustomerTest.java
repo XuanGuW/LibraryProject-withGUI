@@ -30,13 +30,13 @@ class CustomerTest {
     @Test
     void testBorrowBookAvailable(){
         //check that the book is available
-        assertTrue(b.isAvailable());
+
 
         //a customer borrow a book
         customerA.borrow(b);
 
         //check that the book is borrowed by the customer
-        assertFalse(b.isAvailable());
+
         assertEquals(customerA, b.getBorrower());
     }
 
@@ -44,12 +44,9 @@ class CustomerTest {
     @Test
     void testBorrowBookUnavailable() {
         customerB.borrow(b);
-        //check that the book is unavailable
-        assertFalse(b.isAvailable());
         //a customer borrow a book
         customerA.borrow(b);
-        //check that the book is borrowed by the previous customer
-        assertFalse(b.isAvailable());
+
         assertNotEquals(customerA,b.getBorrower());
         assertEquals(customerB,b.getBorrower());
     }
@@ -63,7 +60,7 @@ class CustomerTest {
         assertEquals(customerA, b.getBorrower());
         //return the book
         customerA.returnBook(b);
-        assertTrue(b.isAvailable());
+
 
     }
 
@@ -77,7 +74,7 @@ class CustomerTest {
         //return the book
         customerA.returnBook(b);
         //check the book is unavailable
-        assertFalse(b.isAvailable());
+
     }
 
     @Test

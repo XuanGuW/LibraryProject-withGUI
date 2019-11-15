@@ -5,9 +5,9 @@ import java.util.Objects;
 public abstract class AbstractBook implements Book {
 
     protected String name;
-    protected String author;
-    protected Customer borrower;
-    protected Boolean availability = true;
+    String author;
+    Customer borrower;
+
 
     //EFFECT: Make two strings to represent book name and author
     @Override
@@ -16,10 +16,6 @@ public abstract class AbstractBook implements Book {
     }
 
     //EFFECTS: return the availability
-    @Override
-    public boolean isAvailable() {
-        return availability;
-    }
 
     //EFFECTS: A customer borrow a book
     @Override
@@ -61,10 +57,6 @@ public abstract class AbstractBook implements Book {
         }
     }
 
-    @Override
-    public void setAvailability(Boolean availability) {
-        this.availability = availability;
-    }
 
     @Override
     public boolean equals(Object o) {

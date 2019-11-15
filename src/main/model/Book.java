@@ -17,18 +17,11 @@ public interface Book {
     //EFFECTS: set author
     void setAuthor(String author);
 
-    //EFFECTS: return the availability
-    boolean isAvailable();
-
     //EFFECTS: A customer borrow a book
     Customer getBorrower();
 
     //EFFECT: a customer borrows a book
     void setCustomer(Customer customer);
-
-    //EFFECT: set the availability
-    void setAvailability(Boolean availability);
-
 
 
 

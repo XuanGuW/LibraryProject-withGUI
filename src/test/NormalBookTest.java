@@ -19,10 +19,7 @@ class NormalBookTest {
 
 
 
-    @Test
-    void testANewBookIsAvailable() {
-        assertTrue(normalBook.isAvailable());
-    }
+
     @Test
     void testABookWithoutBorrower() {
 

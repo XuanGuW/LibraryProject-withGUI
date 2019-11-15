@@ -13,8 +13,10 @@ public class NormalBook extends AbstractBook {
         this.name = name;
         this.author = author;
         this.borrower = null;
-        this.availability = true;
+
     }
+
+
 
 
 
