@@ -96,7 +96,9 @@ public class Customer implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Hello! A new book: " + arg + " is added to the library!");
+        System.out.println("Hello, " + name + "A new book: " + arg + " is added to the library!");
     }
+
+
 }
 

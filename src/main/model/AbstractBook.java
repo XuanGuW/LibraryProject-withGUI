@@ -9,6 +9,9 @@ public abstract class AbstractBook implements Book {
     Customer borrower;
 
 
+
+
+
     //EFFECT: Make two strings to represent book name and author
     @Override
     public String toString() {

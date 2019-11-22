@@ -68,14 +68,14 @@ class SaverAndLoaderTest {
 
     @Test
     void testLoadBooks() throws IOException {
-        Saver.saveBook(library.getLibraryBooks(),textSave);
+        Saver.saveBooks(library.getLibraryBooks(),textSave);
         Loader.loadBooks(library.getLibraryBooks(),textLoad);
         assertEquals(library.getLibraryBooks().get(b1.getName() + " " + b1.getAuthor()),b1);
     }
 
     @Test
     void testLoadCustomers() throws IOException {
-        Saver.saveCustomer(customers.getCustomers(),textSaveCustomer);
+        Saver.saveCustomers(customers.getCustomers(),textSaveCustomer);
 
     }
 

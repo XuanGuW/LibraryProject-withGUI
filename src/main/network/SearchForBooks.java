@@ -46,6 +46,7 @@ public class SearchForBooks {
             JSONArray bookNames;
 
 
+
             booksInfo = helper(itemsArray,"volumeInfo");
             bookNames = helper(booksInfo,"title");
             System.out.println("Here are the books you are searching for: ");
@@ -56,13 +57,10 @@ public class SearchForBooks {
             }
         } catch (ParseException e) {
             e.printStackTrace();
-
         }
-
-
     }
 
-    public static JSONArray helper(JSONArray itemsArray, String s) {
+    private static JSONArray helper(JSONArray itemsArray, String s) {
         JSONArray newList = new JSONArray();
         for (Object j: itemsArray) {
             JSONObject jsonObject1 = (JSONObject) j;

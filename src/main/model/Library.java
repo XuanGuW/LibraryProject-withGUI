@@ -6,12 +6,14 @@ import exceptions.NoBookIsFound;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
+
 
 
 public class Library extends Observable {
 
     private Map<String, Book> libraryBooks;
+
+
 
     public Library() {
         this.libraryBooks = new HashMap<>();

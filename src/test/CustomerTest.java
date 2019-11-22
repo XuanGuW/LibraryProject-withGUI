@@ -13,6 +13,7 @@ class CustomerTest {
     private Book b;
     private Customer customerA;
     private Customer customerB;
+    private Library library;
 
     @BeforeEach
     void before(){
@@ -24,6 +25,8 @@ class CustomerTest {
 
         customerA = new Customer("TOM","123456789");
         customerB = new Customer("JACK","987654321");
+
+        library = new Library();
     }
 
 
@@ -108,4 +111,11 @@ class CustomerTest {
     void testToString() {
         assertEquals(customerA.toString(),"TOM 123456789");
     }
+
+    @Test
+    void testUpdate() {
+        customerA.update(library,"abc");
+    }
+
+
 }

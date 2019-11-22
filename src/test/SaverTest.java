@@ -44,7 +44,7 @@ public class SaverTest {
     void testSaver() throws IOException {
         textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
         textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest1.txt";
-        Saver.saveBook(library.getLibraryBooks(),textSave);
+        Saver.saveBooks(library.getLibraryBooks(),textSave);
         Loader.loadBooks(library.getLibraryBooks(),textLoad);
         assertEquals(library.getLibraryBooks().get(b.getName() + " " + b.getAuthor()),b);
 
@@ -55,7 +55,7 @@ public class SaverTest {
         library.getLibraryBooks().put(b2.getName(),b2);
         textSave = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
         textLoad = "/Users/guxuan/Desktop/project_t8u2b/src/bookTest2.txt";
-        Saver.saveBook(library.getLibraryBooks(),textSave);
+        Saver.saveBooks(library.getLibraryBooks(),textSave);
         Loader.loadBooks(library.getLibraryBooks(),textLoad);
         assertEquals(library.getLibraryBooks().get(b.getName() + " " + b.getAuthor()),b);
         assertEquals(library.getLibraryBooks().get(b2.getName() + " " + b2.getAuthor()),b2);

@@ -49,8 +49,8 @@ class LibraryApplication {
             scanner = new Scanner(System.in);
             identity = scanner.nextLine();
             identityHelper(identity);
-            Saver.saveBook(library.getLibraryBooks(), text1);
-            Saver.saveCustomer(customers.getCustomers(), text2);
+            Saver.saveBooks(library.getLibraryBooks(), text1);
+            Saver.saveCustomers(customers.getCustomers(), text2);
 
 
         }
