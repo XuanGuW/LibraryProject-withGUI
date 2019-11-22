@@ -4,8 +4,9 @@ import javax.swing.*;
 
 public class Label extends JLabel {
 
-    public Label(String message) {
+    public Label(String message,int x,int y, int w,int h) {
         super(message);
-        setBounds(100,10,300,100);
+        setBounds(x,y,w,h);
+        setVisible(true);
     }
 }
