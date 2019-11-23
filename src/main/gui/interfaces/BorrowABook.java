@@ -4,11 +4,8 @@ import gui.Button;
 import gui.StandardFrame;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class BorrowABook {
+class BorrowABook {
 
     BorrowABook(String title) {
         JFrame frame = new StandardFrame(title);
@@ -22,13 +19,8 @@ public class BorrowABook {
         JButton enter = new Button("Enter",300,130,80,40);
 
 
-        enter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new InformationConformation("Now you can enjoy your reading !",
-                        "You can keep this book for 20 days !");
-            }
-        });
+        enter.addActionListener(e -> new InformationConformation("Now you can enjoy your reading !",
+                "You can keep this book for 20 days !"));
 
 
 

@@ -25,14 +25,9 @@ public class CustomerRegistration {
         JTextField phoneNumber = new TextField(200,130,100,30);
         JButton ok = new Button("OK",300,130,50,30);
 
-        ok.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new InformationConformation("You are registered the library System !"," Now try again ! ");
-
-
-                frame.dispose();
-            }
+        ok.addActionListener(e -> {
+            new InformationConformation("You are registered the library System !"," Now try again ! ");
+            frame.dispose();
         });
 
         frame.add(instruction1);

@@ -5,9 +5,7 @@ import gui.Label;
 import gui.StandardFrame;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 class CustomerInterface extends JFrame {
 
@@ -20,21 +18,12 @@ class CustomerInterface extends JFrame {
         JButton returnABook = new Button("I want to return a book!",50,100,300,40);
 
 
-        borrowABook.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RegisteredOrNot();
-                frame.dispose();
-            }
+        borrowABook.addActionListener(e -> {
+            new RegisteredOrNot();
+            frame.dispose();
         });
 
-        returnABook.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ReturnABook();
-
-            }
-        });
+        returnABook.addActionListener(e -> new ReturnABook());
 
 
         frame.add(label);

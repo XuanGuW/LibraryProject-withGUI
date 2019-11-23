@@ -4,10 +4,7 @@ import gui.Button;
 import gui.Label;
 import gui.StandardFrame;
 import gui.TextField;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class AddABook {
 
@@ -22,13 +19,9 @@ class AddABook {
         JLabel authorLabel = new Label("Author  :  ",70,100,100,30);
         JButton enter = new Button("Enter",300,130,80,40);
 
-        enter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new InformationConformation("The book is successfully added to the library!");
-
-                frame.dispose();
-            }
+        enter.addActionListener(e -> {
+            new InformationConformation("The book is successfully added to the library!");
+            frame.dispose();
         });
 
         frame.add(name);

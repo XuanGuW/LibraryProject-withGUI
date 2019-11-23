@@ -20,12 +20,7 @@ public class ReturnABook {
         JLabel authorLabel = new gui.Label("Author  :  ",70,100,100,30);
         JButton enter = new Button("Enter",300,130,80,40);
 
-        enter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new InformationConformation("Process successfully !");
-            }
-        });
+        enter.addActionListener(e -> new InformationConformation("Process successfully !"));
 
 
         frame.add(name);

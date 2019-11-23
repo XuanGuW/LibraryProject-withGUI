@@ -17,12 +17,9 @@ class TheEnd {
         JLabel label2 = new Label("Have a nice day!",220,80,300,50);
         JButton button = new Button("OK",300,120,80,30);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FirstInterface("Library");
-                frame.dispose();
-            }
+        button.addActionListener(e -> {
+            new FirstInterface("Library");
+            frame.dispose();
         });
         frame.add(label1);
         frame.add(label2);

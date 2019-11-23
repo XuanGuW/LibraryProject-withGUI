@@ -6,8 +6,6 @@ import gui.Label;
 import gui.StandardFrame;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class LibrarianInterface {
 
@@ -18,20 +16,14 @@ class LibrarianInterface {
         JButton addABook = new Button("I want to add a book",50,80,300,40);
         JButton seeAllBooks = new Button("I want to see all the books in library",50,120,300,40);
 
-        addABook.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddABook("Add A New Book");
-                frame.dispose();
-            }
+        addABook.addActionListener(e -> {
+            new AddABook("Add A New Book");
+            frame.dispose();
         });
 
-        seeAllBooks.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new SeeAllBooks();
-                frame.dispose();
-            }
+        seeAllBooks.addActionListener(e -> {
+            new SeeAllBooks();
+            frame.dispose();
         });
 
 

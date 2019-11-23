@@ -16,21 +16,15 @@ public class RegisteredOrNot {
         JButton yes = new Button("Yes!",50,70,300,40);
         JButton no = new Button("No, I need to register first.",50,120,300,40);
 
-        yes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new BorrowABook("Book Information");
-                frame.dispose();
+        yes.addActionListener(e -> {
+            new BorrowABook("Book Information");
+            frame.dispose();
 
-            }
         });
 
-        no.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CustomerRegistration();
-                frame.dispose();
-            }
+        no.addActionListener(e -> {
+            new CustomerRegistration();
+            frame.dispose();
         });
 
         frame.add(label);

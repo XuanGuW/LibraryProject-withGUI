@@ -15,12 +15,9 @@ class InformationConformation {
 
         JLabel label = new Label(message,50,50,300,50);
         JButton button = new Button("Next",100,100,200,50);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new TheEnd();
-                frame.dispose();
-            }
+        button.addActionListener(e -> {
+            new TheEnd();
+            frame.dispose();
         });
 
         frame.add(label);
@@ -35,12 +32,9 @@ class InformationConformation {
         JLabel label2 = new Label(message2,50,50,300,50);
 
         JButton button = new Button("Next",100,100,200,50);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FirstInterface("Library");
-                frame.dispose();
-            }
+        button.addActionListener(e -> {
+            new FirstInterface("Library");
+            frame.dispose();
         });
 
         frame.add(label);
