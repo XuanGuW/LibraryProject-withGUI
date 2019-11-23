@@ -1,20 +1,18 @@
-package gui.frame;
+package gui.interfaces;
 
 import gui.Button;
 import gui.Label;
+import gui.StandardFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FirstFrame extends JFrame {
+public class FirstInterface {
 
-    public FirstFrame(String name) {
-        super(name);
-        setSize(400,200);
-        setLayout(null);
-        setVisible(true);
-        setLocationRelativeTo(null);
+    public FirstInterface(String title) {
+        JFrame frame = new StandardFrame(title);
+
 
         JButton b1 = new Button("Yes!",100,80,200,40);
         JButton b2 = new Button("No, I am a customer",100,120,200,40);
@@ -22,16 +20,16 @@ public class FirstFrame extends JFrame {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LibrarianFrame("Librarian Interface");
-                dispose();
+                new LibrarianInterface("Librarian Interface");
+                frame.dispose();
             }
         });
 
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CustomerFrame("Customer Interface");
-                dispose();
+                new CustomerInterface("Customer Interface");
+                frame.dispose();
             }
         });
 
@@ -41,9 +39,9 @@ public class FirstFrame extends JFrame {
 
 
 
-        add(b1);
-        add(b2);
-        add(label1);
+        frame.add(b1);
+        frame.add(b2);
+        frame.add(label1);
 
 
 

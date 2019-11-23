@@ -8,6 +8,7 @@ public class Button extends JButton {
         super(name);
         setBounds(x,y,w,h);
 
+
     }
 
 
