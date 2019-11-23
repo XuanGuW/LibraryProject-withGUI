@@ -2,8 +2,6 @@ package gui;
 
 import gui.interfaces.FirstInterface;
 
-import javax.swing.*;
-
 public class Main {
 
 

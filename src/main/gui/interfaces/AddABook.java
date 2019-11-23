@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddABookInterface {
+class AddABook {
 
-    public AddABookInterface(String title) {
+    AddABook(String title) {
         JFrame frame = new StandardFrame(title);
 
         JTextField name = new TextField(150,70,100,30);
@@ -25,7 +25,7 @@ public class AddABookInterface {
         enter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new InformationCompleteInterface("The book is successfully added to the library!");
+                new InformationConformation("The book is successfully added to the library!");
 
                 frame.dispose();
             }

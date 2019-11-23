@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LibrarianInterface {
+class LibrarianInterface {
 
-    public LibrarianInterface(String title) {
+    LibrarianInterface(String title) {
         JFrame frame = new StandardFrame(title);
 
         JLabel label = new Label("So, what are you going to do today?",50,10,300,100);
@@ -21,7 +21,7 @@ public class LibrarianInterface {
         addABook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddABookInterface("Add A New Book");
+                new AddABook("Add A New Book");
                 frame.dispose();
             }
         });
@@ -29,7 +29,8 @@ public class LibrarianInterface {
         seeAllBooks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new SeeAllBooks();
+                frame.dispose();
             }
         });
 

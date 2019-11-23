@@ -8,9 +8,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TheEnd {
+class TheEnd {
 
-    public TheEnd() {
+    TheEnd() {
         JFrame frame = new StandardFrame("The End");
 
         JLabel label1 = new Label("Thank you for using our system,",50,50,300,50);

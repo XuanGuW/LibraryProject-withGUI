@@ -1,8 +1,14 @@
 package gui.interfaces;
 
-public class SeeAllBooks {
+import gui.StandardFrame;
 
-    public SeeAllBooks() {
+import javax.swing.*;
+
+class SeeAllBooks {
+
+    SeeAllBooks() {
+
+        JFrame frame = new StandardFrame("Library Books");
 
     }
 

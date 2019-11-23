@@ -36,9 +36,6 @@ public class FirstInterface {
         JLabel label1 = new Label(" Hello! Are you a librarian?",100,10,300,100);
 
 
-
-
-
         frame.add(b1);
         frame.add(b2);
         frame.add(label1);
