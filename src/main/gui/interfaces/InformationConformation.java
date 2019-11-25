@@ -3,20 +3,20 @@ package gui.interfaces;
 import gui.Button;
 import gui.Label;
 import gui.StandardFrame;
+import model.Customers;
+import model.Library;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class InformationConformation {
 
-    InformationConformation(String message) {
+    InformationConformation(String message, Library library, Customers customers) {
         JFrame frame = new StandardFrame("Confirmation");
 
         JLabel label = new Label(message,50,50,300,50);
         JButton button = new Button("Next",100,100,200,50);
         button.addActionListener(e -> {
-            new TheEnd();
+            new TheEnd(library,customers);
             frame.dispose();
         });
 
@@ -25,7 +25,7 @@ class InformationConformation {
 
     }
 
-    InformationConformation(String message, String message2) {
+    InformationConformation(String message, String message2, Library library, Customers customers) {
         JFrame frame = new StandardFrame("Confirmation");
 
         JLabel label = new Label(message,50,20,300,50);
@@ -33,7 +33,7 @@ class InformationConformation {
 
         JButton button = new Button("Next",100,100,200,50);
         button.addActionListener(e -> {
-            new FirstInterface("Library");
+            new FirstInterface("Library",library,customers);
             frame.dispose();
         });
 

@@ -44,5 +44,15 @@ public class Library extends Observable {
 
 
 
+    public String booksToString() {
+        StringBuilder bookString = new StringBuilder();
+        for (String string :libraryBooks.keySet()) {
+            bookString.append(string).append("\n");
+        }
+        return bookString.toString();
+    }
+
+
+
 }
 

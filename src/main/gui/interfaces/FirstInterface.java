@@ -2,7 +2,9 @@ package gui.interfaces;
 
 import gui.Button;
 import gui.Label;
+import gui.Main;
 import gui.StandardFrame;
+import model.Customers;
 import model.Library;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import javax.swing.*;
 public class FirstInterface {
 
 
-    public FirstInterface(String title) {
+    public FirstInterface(String title, Library library, Customers customers) {
         JFrame frame = new StandardFrame(title);
 
 
@@ -18,12 +20,12 @@ public class FirstInterface {
         JButton b2 = new Button("No, I am a customer",100,120,200,40);
 
         b1.addActionListener(e -> {
-            new LibrarianInterface("Librarian Interface");
+            new LibrarianInterface("Librarian Interface", library,customers);
             frame.dispose();
         });
 
         b2.addActionListener(e -> {
-            new CustomerInterface("Customer Interface");
+            new CustomerInterface("Customer Interface", library, customers);
             frame.dispose();
         });
 

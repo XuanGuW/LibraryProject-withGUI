@@ -4,14 +4,14 @@ import gui.Button;
 import gui.Label;
 import gui.StandardFrame;
 import gui.TextField;
+import model.Customers;
+import model.Library;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CustomerRegistration {
 
-    public CustomerRegistration() {
+    public CustomerRegistration(Library library, Customers customers) {
         JFrame frame = new StandardFrame("Registration");
 
         JLabel instruction1 = new Label("Could you please ",50,50,300,30);
@@ -26,7 +26,8 @@ public class CustomerRegistration {
         JButton ok = new Button("OK",300,130,50,30);
 
         ok.addActionListener(e -> {
-            new InformationConformation("You are registered the library System !"," Now try again ! ");
+            new InformationConformation("You are registered the library System !",
+                    " Now try again ! ",library,customers);
             frame.dispose();
         });
 

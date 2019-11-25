@@ -4,12 +4,17 @@ package gui.interfaces;
 import gui.Button;
 import gui.Label;
 import gui.StandardFrame;
+import model.Customers;
+import model.Library;
 
 import javax.swing.*;
 
 class LibrarianInterface {
 
-    LibrarianInterface(String title) {
+
+
+    LibrarianInterface(String title, Library library, Customers customers) {
+
         JFrame frame = new StandardFrame(title);
 
         JLabel label = new Label("So, what are you going to do today?",50,10,300,100);
@@ -17,12 +22,12 @@ class LibrarianInterface {
         JButton seeAllBooks = new Button("I want to see all the books in library",50,120,300,40);
 
         addABook.addActionListener(e -> {
-            new AddABook("Add A New Book");
+            new AddABook("Add A New Book",library,customers);
             frame.dispose();
         });
 
         seeAllBooks.addActionListener(e -> {
-            new SeeAllBooks();
+            new SeeAllBooks(library,customers);
             frame.dispose();
         });
 

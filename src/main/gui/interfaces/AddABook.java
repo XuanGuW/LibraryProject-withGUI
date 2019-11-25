@@ -1,14 +1,23 @@
 package gui.interfaces;
 
+import exceptions.NameIsEmptyString;
 import gui.Button;
 import gui.Label;
 import gui.StandardFrame;
 import gui.TextField;
+import model.Book;
+import model.Customers;
+import model.Library;
+import model.NormalBook;
+
 import javax.swing.*;
 
 class AddABook {
 
-    AddABook(String title) {
+    AddABook(String title, Library library, Customers customers) {
+
+
+
         JFrame frame = new StandardFrame(title);
 
         JTextField name = new TextField(150,70,100,30);
@@ -20,8 +29,20 @@ class AddABook {
         JButton enter = new Button("Enter",300,130,80,40);
 
         enter.addActionListener(e -> {
-            new InformationConformation("The book is successfully added to the library!");
-            frame.dispose();
+            try {
+                Book book = new NormalBook(name.getText(),author.getText());
+                library.addABook(book);
+                new InformationConformation("The book is successfully added to the library!", library,customers);
+                frame.dispose();
+            } catch (NameIsEmptyString emptyString) {
+                JLabel label = new Label("Please enter the right information!",
+                        10,180,200,10);
+
+            }
+
+
+
+
         });
 
         frame.add(name);

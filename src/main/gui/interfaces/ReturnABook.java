@@ -2,14 +2,15 @@ package gui.interfaces;
 
 import gui.Button;
 import gui.StandardFrame;
+import model.Customers;
+import model.Library;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class ReturnABook {
 
-    public ReturnABook() {
+    public ReturnABook(Library library, Customers customers) {
         JFrame frame = new StandardFrame("Return A Book");
 
         JTextField name = new gui.TextField(150,70,100,30);
@@ -20,7 +21,7 @@ public class ReturnABook {
         JLabel authorLabel = new gui.Label("Author  :  ",70,100,100,30);
         JButton enter = new Button("Enter",300,130,80,40);
 
-        enter.addActionListener(e -> new InformationConformation("Process successfully !"));
+        enter.addActionListener(e -> new InformationConformation("Process successfully !",library,customers));
 
 
         frame.add(name);
