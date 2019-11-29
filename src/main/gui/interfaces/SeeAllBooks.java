@@ -1,12 +1,12 @@
 package gui.interfaces;
 
-import gui.Button;
 import model.Customers;
 import model.Library;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 class SeeAllBooks {
@@ -70,8 +70,13 @@ class SeeAllBooks {
 
         JButton returnButton = new JButton("Return");
 
+        // go to the first interface
         returnButton.addActionListener(e -> {
-            new FirstInterface("Library",library,customers);
+            try {
+                new FirstInterface("Library",library,customers);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             frame.dispose();
         });
 

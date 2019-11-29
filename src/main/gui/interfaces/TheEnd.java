@@ -7,8 +7,7 @@ import model.Customers;
 import model.Library;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 
 class TheEnd {
 
@@ -19,8 +18,13 @@ class TheEnd {
         JLabel label2 = new Label("Have a nice day!",220,80,300,50);
         JButton button = new Button("OK",300,120,80,30);
 
+        // go to the first interface
         button.addActionListener(e -> {
-            new FirstInterface("Library",library, customers);
+            try {
+                new FirstInterface("Library",library, customers);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             frame.dispose();
         });
         frame.add(label1);

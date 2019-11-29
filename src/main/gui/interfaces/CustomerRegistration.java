@@ -9,9 +9,9 @@ import model.Library;
 
 import javax.swing.*;
 
-public class CustomerRegistration {
+class CustomerRegistration {
 
-    public CustomerRegistration(Library library, Customers customers) {
+    CustomerRegistration(Library library, Customers customers) {
         JFrame frame = new StandardFrame("Registration");
 
         JLabel instruction1 = new Label("Could you please ",50,50,300,30);
@@ -25,8 +25,10 @@ public class CustomerRegistration {
         JTextField phoneNumber = new TextField(200,130,100,30);
         JButton ok = new Button("OK",300,130,50,30);
 
+
+        //registration for a customer
         ok.addActionListener(e -> {
-            new InformationConformation("You are registered the library System !",
+            new InformationConfirmation("You are registered the library System !",
                     " Now try again ! ",library,customers);
             frame.dispose();
         });

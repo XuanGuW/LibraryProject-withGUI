@@ -7,10 +7,13 @@ import model.Customers;
 import model.Library;
 
 import javax.swing.*;
+import java.io.IOException;
 
-class InformationConformation {
+class InformationConfirmation {
 
-    InformationConformation(String message, Library library, Customers customers) {
+
+    // confirmation interface with one-line message
+    InformationConfirmation(String message, Library library, Customers customers) {
         JFrame frame = new StandardFrame("Confirmation");
 
         JLabel label = new Label(message,50,50,300,50);
@@ -25,7 +28,8 @@ class InformationConformation {
 
     }
 
-    InformationConformation(String message, String message2, Library library, Customers customers) {
+    // confirmation interface with two-line message
+    InformationConfirmation(String message, String message2, Library library, Customers customers) {
         JFrame frame = new StandardFrame("Confirmation");
 
         JLabel label = new Label(message,50,20,300,50);
@@ -33,7 +37,11 @@ class InformationConformation {
 
         JButton button = new Button("Next",100,100,200,50);
         button.addActionListener(e -> {
-            new FirstInterface("Library",library,customers);
+            try {
+                new FirstInterface("Library",library,customers);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             frame.dispose();
         });
 

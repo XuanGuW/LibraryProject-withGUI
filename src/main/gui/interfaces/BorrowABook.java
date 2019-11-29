@@ -1,16 +1,11 @@
 package gui.interfaces;
 
-import exceptions.NameIsEmptyString;
-import exceptions.NoBookIsFound;
 import gui.Button;
 import gui.Label;
-import gui.StandardFrame;
 import gui.TextField;
 import model.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class BorrowABook {
 
@@ -42,34 +37,30 @@ class BorrowABook {
 
         JButton enter = new Button("Enter",300,130,80,50);
 
+        //A customer borrow a book
+        enter.addActionListener(e -> {
+            try {
+                Book book = new NormalBook(name.getText(),author.getText());
+                Customer customer = new Customer(customerName.getText(),phoneNumber.getText());
 
-        enter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                try {
-                    Book book = new NormalBook(name.getText(),author.getText());
-                    Customer customer = new Customer(customerName.getText(),phoneNumber.getText());
-
-                    library.findABook(name.getText(),author.getText());
-                    customers.findACustomer(customerName.getText(),phoneNumber.getText());
-                    book.setCustomer(customer);
-                    customer.borrow(book);
-                    new InformationConformation("Now you can enjoy your reading !",
-                            "You can keep this book for 20 days !",library,customers);
+                library.findABook(name.getText(),author.getText());
+                customers.findACustomer(customerName.getText(),phoneNumber.getText());
+                book.setCustomer(customer);
+                customer.borrow(book);
+                new InformationConfirmation("Now you can enjoy your reading !",
+                        "You can keep this book for 20 days !",library,customers);
 
 
-                    frame.dispose();
-                } catch (Exception exception) {
+                frame.dispose();
+            } catch (Exception exception) {
 
-                    JLabel label = new Label("Please enter the correct information!",
-                            20,180,350,30);
-                    frame.add(label);
-                }
-
-
-
+                JLabel label = new Label("Please enter the correct information!",
+                        20,180,350,30);
+                frame.add(label);
             }
+
+
+
         });
 
         frame.add(label1);

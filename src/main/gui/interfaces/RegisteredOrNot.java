@@ -7,10 +7,8 @@ import model.Customers;
 import model.Library;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class RegisteredOrNot {
+class RegisteredOrNot {
 
     RegisteredOrNot(Library library, Customers customers) {
         JFrame frame = new StandardFrame("Registered?");
@@ -18,18 +16,16 @@ public class RegisteredOrNot {
         JButton yes = new Button("Yes!",50,80,300,40);
         JButton no = new Button("No, I need to register first.",50,120,300,40);
 
+
+        // click yes button and go to borrow book interface
         yes.addActionListener(e -> {
-            new BorrowABook("Book Information",library,customers);
+            new BorrowABook("Library",library,customers);
             frame.dispose();
 
         });
 
+        //click no button and go to registration interface for a new customer
         no.addActionListener(e -> {
-
-
-
-
-
             new CustomerRegistration(library,customers);
             frame.dispose();
         });

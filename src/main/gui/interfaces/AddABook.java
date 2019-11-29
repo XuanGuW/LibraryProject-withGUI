@@ -28,15 +28,18 @@ class AddABook {
         JLabel authorLabel = new Label("Author  :  ",70,100,100,30);
         JButton enter = new Button("Enter",300,130,80,40);
 
+
+        //add a book to the library
         enter.addActionListener(e -> {
             try {
                 Book book = new NormalBook(name.getText(),author.getText());
                 library.addABook(book);
-                new InformationConformation("The book is successfully added to the library!", library,customers);
+                new InformationConfirmation("The book is successfully added to the library!", library,customers);
                 frame.dispose();
             } catch (NameIsEmptyString emptyString) {
                 JLabel label = new Label("Please enter the right information!",
-                        10,180,200,10);
+                        10,150,300,10);
+                frame.add(label);
 
             }
 

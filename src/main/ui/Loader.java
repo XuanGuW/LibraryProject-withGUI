@@ -33,7 +33,7 @@ public class Loader {
 
 
 
-    static Map<String, Customer> loadCustomers(Map<String, Customer> customers, String text) throws IOException {
+    public static Map<String, Customer> loadCustomers(Map<String, Customer> customers, String text) throws IOException {
         List<String> lineOfStrings = Files.readAllLines(Paths.get(text));
 
         for (String string : lineOfStrings) {

@@ -11,7 +11,6 @@ import javax.swing.*;
 
 class CustomerInterface {
 
-
     CustomerInterface(String title, Library library, Customers customers) {
         JFrame frame = new StandardFrame(title);
 
@@ -20,12 +19,17 @@ class CustomerInterface {
         JButton returnABook = new Button("I want to return a book!",50,120,300,40);
 
 
+        // go to borrow book interface
         borrowABook.addActionListener(e -> {
             new RegisteredOrNot(library,customers);
             frame.dispose();
         });
 
-        returnABook.addActionListener(e -> new ReturnABook(library,customers));
+        // go to return a book interface
+        returnABook.addActionListener(e -> {
+            new ReturnABook(library,customers);
+            frame.dispose();
+        });
 
 
         frame.add(label);
